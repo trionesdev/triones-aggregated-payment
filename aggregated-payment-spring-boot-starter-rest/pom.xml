@@ -62,6 +62,11 @@
             <artifactId>kotlin-test-junit5</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.trionesdev.payment</groupId>
+            <artifactId>triones-wxpay-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
