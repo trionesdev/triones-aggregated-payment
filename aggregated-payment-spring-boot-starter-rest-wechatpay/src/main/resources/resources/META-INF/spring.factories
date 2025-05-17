@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.trionesdev.payment.aggregated.spring.boot.starter.rest.wechatpay.WechatPayAutoConfiguration

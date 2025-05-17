@@ -8,13 +8,19 @@
     <artifactId>aggregated-payment</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <name>Triones:AggregatedPayment</name>
     <modules>
         <module>aggregated-payment-spring-boot-starter-rest</module>
+        <module>aggregated-payment-core</module>
+        <module>aggregated-payment-spring-boot-starter-rest-wechatpay</module>
+        <module>aggregated-payment-spring-boot-starter-rest-alipay</module>
+        <module>aggregated-payment-wechatpay</module>
+        <module>aggregated-payment-spring-boot-starter</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
