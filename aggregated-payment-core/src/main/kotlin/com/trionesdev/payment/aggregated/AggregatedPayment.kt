@@ -1,5 +1,7 @@
 package com.trionesdev.payment.aggregated
 
+import com.trionesdev.payment.aggregated.shared.model.CloseOrderRequest
+import com.trionesdev.payment.aggregated.shared.model.CloseOrderResponse
 import com.trionesdev.payment.aggregated.shared.model.CreateOrderRequest
 import com.trionesdev.payment.aggregated.shared.model.CreateOrderResponse
 
@@ -12,7 +14,7 @@ abstract class AggregatedPayment {
     /**
      * 关闭支付订单
      */
-    abstract fun closeOrder()
+    abstract fun closeOrder(request: CloseOrderRequest): CloseOrderResponse
 
     /**
      * 退款申请
