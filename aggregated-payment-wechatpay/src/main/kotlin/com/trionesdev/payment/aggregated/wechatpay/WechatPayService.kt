@@ -2,6 +2,7 @@ package com.trionesdev.payment.aggregated.wechatpay
 
 import com.trionesdev.payment.aggregated.AggregatedPayment
 import com.trionesdev.payment.aggregated.AggregatedPaymentNotify
+import com.trionesdev.payment.aggregated.PaymentComponent
 import com.trionesdev.payment.aggregated.shared.model.CreateOrderRequest
 import com.trionesdev.payment.aggregated.shared.model.CreateOrderResponse
 import com.trionesdev.payment.aggregated.shared.enums.Scene
@@ -12,6 +13,7 @@ import com.trionesdev.payment.wechatpay.v3.payment.h5.model.WechatPayH5CreateOrd
 import com.trionesdev.payment.wechatpay.v3.payment.jsapi.model.WechatPayJsApiCreateOrderRequest
 import com.trionesdev.payment.wechatpay.v3.payment.nativepay.model.WechatPayNativeCreateOrderRequest
 
+@PaymentComponent(channel = "WECHAT_PAY")
 class WechatPayService(
     var wechatTemplate: WechatPayTemplate?,
     var aggregatedPaymentNotify: AggregatedPaymentNotify?
