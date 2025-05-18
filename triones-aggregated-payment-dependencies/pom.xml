@@ -10,7 +10,7 @@
     </parent>
     <packaging>pom</packaging>
 
-    <artifactId>triones-aggregated-pyament-dependencies</artifactId>
+    <artifactId>triones-aggregated-payment-dependencies</artifactId>
     <name>Triones:AggregatedPayment:Dependencies</name>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

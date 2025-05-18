@@ -16,7 +16,7 @@
         <module>triones-aggregated-payment-spring-boot-starter-rest-alipay</module>
         <module>triones-aggregated-payment-wechatpay</module>
         <module>triones-aggregated-payment-spring-boot-starter</module>
-        <module>triones-aggregated-pyament-dependencies</module>
+        <module>triones-aggregated-payment-dependencies</module>
     </modules>
 
     <properties>
@@ -37,7 +37,7 @@
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-pyament-dependencies</artifactId>
+                <artifactId>triones-aggregated-payment-dependencies</artifactId>
                 <version>1.0-SNAPSHOT</version>
                 <scope>import</scope>
                 <type>pom</type>
