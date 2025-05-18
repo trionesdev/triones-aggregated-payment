@@ -14,4 +14,5 @@ class CloseOrderRequest {
      * 商户自定义订单ID
      */
     var outTradeNo: String? = null
+    var merchantId: String? = null
 }

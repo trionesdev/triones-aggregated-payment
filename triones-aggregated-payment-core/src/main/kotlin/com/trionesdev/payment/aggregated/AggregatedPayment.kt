@@ -21,6 +21,6 @@ abstract class AggregatedPayment {
     /**
      * 转账(商户对用户转账)
      */
-    abstract fun transfer(request: TransferRequest): TransferResponse
+    abstract fun createTransfer(request: CreateTransferRequest): CreateTransferResponse
 
 }

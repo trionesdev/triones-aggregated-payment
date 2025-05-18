@@ -9,6 +9,7 @@ import com.trionesdev.payment.aggregated.shared.enums.Scene
 import com.trionesdev.payment.aggregated.shared.model.*
 import com.trionesdev.payment.wechatpay.v3.WechatPay
 import com.trionesdev.payment.wechatpay.v3.model.notify.WechatPayNotifyParseRequest
+import com.trionesdev.payment.wechatpay.v3.payment.model.WechatPayCloseOrderRequest
 import java.math.BigDecimal
 import java.time.Instant
 
@@ -53,15 +54,20 @@ class WechatPayService(
     }
 
     override fun closeOrder(request: CloseOrderRequest) {
-
+        val req = WechatPayCloseOrderRequest()
+        req.mchId = request.merchantId
+        req.outTradeNo = request.outTradeNo
+        wechatpay!!.payment.closeOrder(req)
     }
 
     override fun createRefund(request: CreateRefundRequest): CreateRefundResponse {
-        TODO("Not yet implemented")
+        val response = wechatpay!!.payment.createRefund(ConvertUtils.createRefundRequestToWechatPay(request))
+        return ConvertUtils.createRefundResponseFromWechatPay(response)
     }
 
-    override fun transfer(request: TransferRequest): TransferResponse {
-        TODO("Not yet implemented")
+    override fun createTransfer(request: CreateTransferRequest): CreateTransferResponse {
+        val response = wechatpay!!.operation.createTransfer(ConvertUtils.createTransferRequestToWechatPay(request))
+        return ConvertUtils.createTransferResponseFromWechatPay(response)
     }
 
 
