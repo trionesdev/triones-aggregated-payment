@@ -1,5 +1,8 @@
 package com.trionesdev.payment.aggregated.shared.model
 
+/**
+ * 关闭订单请求
+ */
 class CloseOrderRequest {
     var channel: String? = null
     /**

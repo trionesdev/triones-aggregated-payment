@@ -7,6 +7,8 @@ class Money {
     var amount: BigDecimal? = null
     var currency: Currency? = null
 
+    constructor()
+
     constructor(amount: BigDecimal) {
         this.amount = amount
         this.currency = Currency.CNY

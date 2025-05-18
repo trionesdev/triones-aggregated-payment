@@ -4,6 +4,9 @@ import com.trionesdev.payment.aggregated.shared.enums.Channel
 import com.trionesdev.payment.aggregated.shared.enums.Scene
 import java.time.Instant
 
+/**
+ * 创建订单请求
+ */
 class CreateOrderRequest {
     var channel: Channel? = null
     var scene: Scene? = null
