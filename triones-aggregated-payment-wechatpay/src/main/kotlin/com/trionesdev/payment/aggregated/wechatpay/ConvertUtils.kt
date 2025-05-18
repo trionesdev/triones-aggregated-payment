@@ -42,6 +42,7 @@ object ConvertUtils {
         createTransferResponse.billNo = response.transferBillNo
         createTransferResponse.outBillNo = response.outBillNo
         createTransferResponse.extra = mapOf("packageInfo" to response.packageInfo)
+        createTransferResponse.original = response
         return createTransferResponse
     }
 }
