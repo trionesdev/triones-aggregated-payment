@@ -1,0 +1,12 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.trionesdev.payment</groupId>
+        <artifactId>triones-aggregated-payment</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>triones-aggregated-payment-spring-boot-starter-rest-alipay</artifactId>
+    <name>Triones:AggregatedPayment:SpringBoot:Rest:Alipay</name>
+    <url>http://maven.apache.org</url>
+</project>

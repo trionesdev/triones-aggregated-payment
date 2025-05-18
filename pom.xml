@@ -5,23 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.trionesdev.payment</groupId>
-    <artifactId>aggregated-payment</artifactId>
+    <artifactId>triones-aggregated-payment</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Triones:AggregatedPayment</name>
     <modules>
-        <module>aggregated-payment-spring-boot-starter-rest</module>
-        <module>aggregated-payment-core</module>
-        <module>aggregated-payment-spring-boot-starter-rest-wechatpay</module>
-        <module>aggregated-payment-spring-boot-starter-rest-alipay</module>
-        <module>aggregated-payment-wechatpay</module>
-        <module>aggregated-payment-spring-boot-starter</module>
+        <module>triones-aggregated-payment-spring-boot-starter-rest</module>
+        <module>triones-aggregated-payment-core</module>
+        <module>triones-aggregated-payment-spring-boot-starter-rest-wechatpay</module>
+        <module>triones-aggregated-payment-spring-boot-starter-rest-alipay</module>
+        <module>triones-aggregated-payment-wechatpay</module>
+        <module>triones-aggregated-payment-spring-boot-starter</module>
+        <module>triones-aggregated-pyament-dependencies</module>
     </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <kotlin.version>2.1.21</kotlin.version>
     </properties>
 
     <dependencyManagement>
@@ -35,10 +37,21 @@
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-payment-spring-boot-starters</artifactId>
-                <version>3.0-SNAPSHOT</version>
+                <artifactId>triones-aggregated-pyament-dependencies</artifactId>
+                <version>1.0-SNAPSHOT</version>
                 <scope>import</scope>
                 <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib-jdk8</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-test</artifactId>
+                <version>${kotlin.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
