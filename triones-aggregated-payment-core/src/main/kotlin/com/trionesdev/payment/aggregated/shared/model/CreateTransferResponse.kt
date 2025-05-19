@@ -7,5 +7,5 @@ class CreateTransferResponse {
     var billNo: String? = null
     var outBillNo: String? = null
     var extra: Map<String, Any>? = null
-    var original:Any? = null
+    var raw:Any? = null
 }

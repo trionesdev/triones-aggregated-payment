@@ -3,13 +3,13 @@ package com.trionesdev.payment.aggregated.shared.model
 /**
  * 创建订单返回信息
  */
-class CreateOrderResponse(response: Any?) {
+class CreateOrderResponse(raw: Any?) {
     /**
-     * 支付渠道原始返回信息
+     * 支付渠道原始返回报文
      */
-    var original: Any? = null
+    var raw: Any? = null
 
     init {
-        this.original = response
+        this.raw = raw
     }
 }
