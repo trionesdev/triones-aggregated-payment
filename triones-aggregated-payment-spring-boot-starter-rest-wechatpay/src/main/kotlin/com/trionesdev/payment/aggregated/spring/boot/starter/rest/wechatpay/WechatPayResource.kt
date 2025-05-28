@@ -49,9 +49,22 @@ class WechatPayResource(
         @RequestHeader("Wechatpay-Signature") signature: String,
         @RequestHeader("Wechatpay-Timestamp") timestamp: String,
         @RequestHeader("Wechatpay-Serial") serial: String,
-        @RequestBody body: String
-    ) {
-        wechatPayService.refundNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+        @RequestBody body: String,
+        response: HttpServletResponse,
+    ): TransactionNotifyVO {
+        try {
+            wechatPayService.refundNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+        } catch (e: Exception) {
+            response.sendError(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                JsonUtils.writeValueAsString(
+                    TransactionNotifyVO(
+                        code = "FAIL", message = e.message
+                    )
+                )
+            )
+        }
+        return TransactionNotifyVO(code = "SUCCESS", message = "Refund notify success")
     }
 
 
@@ -64,9 +77,22 @@ class WechatPayResource(
         @RequestHeader("Wechatpay-Signature") signature: String,
         @RequestHeader("Wechatpay-Timestamp") timestamp: String,
         @RequestHeader("Wechatpay-Serial") serial: String,
-        @RequestBody body: String
-    ) {
-        wechatPayService.transferNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+        @RequestBody body: String,
+        response: HttpServletResponse,
+    ): TransactionNotifyVO {
+        try {
+            wechatPayService.transferNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+        } catch (e: Exception) {
+            response.sendError(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                JsonUtils.writeValueAsString(
+                    TransactionNotifyVO(
+                        code = "FAIL", message = e.message
+                    )
+                )
+            )
+        }
+        return TransactionNotifyVO(code = "SUCCESS", message = "Transfer notify success")
     }
 
 }

@@ -7,8 +7,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>triones-aggregated-payment-spring-boot-starter</artifactId>
-    <name>Archetype - aggregated-payment-spring-boot-starter</name>
-    <url>http://maven.apache.org</url>
+    <name>Triones:AggregatedPayment:SpringBoot:Starter</name>
+
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
