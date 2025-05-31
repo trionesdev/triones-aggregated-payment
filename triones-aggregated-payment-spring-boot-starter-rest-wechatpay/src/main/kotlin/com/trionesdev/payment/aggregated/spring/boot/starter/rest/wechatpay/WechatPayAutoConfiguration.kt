@@ -5,9 +5,11 @@ import com.trionesdev.payment.aggregated.wechatpay.WechatPayService
 import com.trionesdev.payment.wechatpay.v3.WechatPay
 import org.springframework.beans.factory.ObjectProvider
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
 @Configuration
+@ComponentScan(basePackages = ["com.trionesdev.payment.aggregated.spring.boot.starter.rest.wechatpay"])
 class WechatPayAutoConfiguration {
 
     @Bean

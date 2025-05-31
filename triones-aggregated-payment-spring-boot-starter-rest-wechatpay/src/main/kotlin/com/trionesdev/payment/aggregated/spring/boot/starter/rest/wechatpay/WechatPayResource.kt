@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/payment/wechatpay")
+@RequestMapping("rest-api/payment/wechatpay")
 class WechatPayResource(
     var wechatPayService: WechatPayService
 ) {
