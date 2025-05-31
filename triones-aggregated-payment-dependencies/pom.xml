@@ -6,7 +6,7 @@
     <packaging>pom</packaging>
     <groupId>com.trionesdev.payment</groupId>
     <artifactId>triones-aggregated-payment-dependencies</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>Triones:AggregatedPayment:Dependencies</name>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -19,7 +19,7 @@
             <dependency>
                 <groupId>com.trionesdev.payment</groupId>
                 <artifactId>triones-payment-spring-boot-dependencies</artifactId>
-                <version>3.0-SNAPSHOT</version>
+                <version>3.0.0-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
