@@ -6,7 +6,7 @@
         <artifactId>triones-aggregated-payment</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>triones-aggregated-payment-spring-boot-starter</artifactId>
+    <artifactId>triones-aggregated-payment-spring</artifactId>
     <name>Triones:AggregatedPayment:SpringBoot:Starter</name>
 
 

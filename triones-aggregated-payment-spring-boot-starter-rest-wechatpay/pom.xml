@@ -43,6 +43,10 @@
             <artifactId>triones-aggregated-payment-wechatpay</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.trionesdev.payment</groupId>
+            <artifactId>triones-wechatpay-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>

@@ -69,7 +69,7 @@
         </dependency>
         <dependency>
             <groupId>com.trionesdev.payment</groupId>
-            <artifactId>triones-wechatpay-spring-boot-starter</artifactId>
+            <artifactId>triones-aggregated-payment-spring</artifactId>
         </dependency>
 
     </dependencies>

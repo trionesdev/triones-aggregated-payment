@@ -14,7 +14,7 @@ import java.math.BigDecimal
 import java.time.Instant
 
 @PaymentComponent(channel = "WECHAT_PAY")
-class WechatPayService(
+class WechatPayAggregatedPayment(
     var wechatpay: WechatPay?,
     var aggregatedPaymentNotify: AggregatedPaymentNotifyCallback?
 ) : AggregatedPayment() {
@@ -41,6 +41,7 @@ class WechatPayService(
             }
 
             Scene.MINI_PROGRAM -> {
+                println("ssssssss")
                 response =
                     wechatpay!!.payment.jsApi.createOrderWithRequestPayment(CreateOrderRequestConvert.jsapi(request))
             }

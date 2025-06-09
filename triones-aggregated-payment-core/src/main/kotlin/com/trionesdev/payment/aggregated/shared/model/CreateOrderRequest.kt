@@ -1,6 +1,5 @@
 package com.trionesdev.payment.aggregated.shared.model
 
-import com.trionesdev.payment.aggregated.shared.enums.Channel
 import com.trionesdev.payment.aggregated.shared.enums.Scene
 import java.time.Instant
 
@@ -8,7 +7,7 @@ import java.time.Instant
  * 创建订单请求
  */
 class CreateOrderRequest {
-    var channel: Channel? = null
+    var channel: String? = null
     var scene: Scene? = null
 
     /**
@@ -36,7 +35,7 @@ class CreateOrderRequest {
     var notifyUrl: String? = null
     var timeExpire: Instant? = null
     var attach: String? = null
-
+    var amount: Money? = null
     /**
      * 订单包含的商品列表信息
      */

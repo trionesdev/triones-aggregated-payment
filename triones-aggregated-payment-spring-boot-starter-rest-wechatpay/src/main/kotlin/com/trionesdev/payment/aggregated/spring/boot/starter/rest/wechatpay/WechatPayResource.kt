@@ -1,6 +1,6 @@
 package com.trionesdev.payment.aggregated.spring.boot.starter.rest.wechatpay
 
-import com.trionesdev.payment.aggregated.wechatpay.WechatPayService
+import com.trionesdev.payment.aggregated.wechatpay.WechatPayAggregatedPayment
 import com.trionesdev.payment.util.JsonUtils
 import com.trionesdev.payment.wechatpay.v3.model.notify.WechatPayNotifyParseRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("rest-api/payment/wechatpay")
 class WechatPayResource(
-    var wechatPayService: WechatPayService
+    var wechatPayAggregatedPayment: WechatPayAggregatedPayment
 ) {
 
     /**
@@ -26,7 +26,7 @@ class WechatPayResource(
         @RequestBody body: String
     ): TransactionNotifyVO {
         try {
-            wechatPayService.transactionNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+            wechatPayAggregatedPayment.transactionNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
         } catch (e: Exception) {
             response.sendError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -53,7 +53,7 @@ class WechatPayResource(
         response: HttpServletResponse,
     ): TransactionNotifyVO {
         try {
-            wechatPayService.refundNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+            wechatPayAggregatedPayment.refundNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
         } catch (e: Exception) {
             response.sendError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
@@ -81,7 +81,7 @@ class WechatPayResource(
         response: HttpServletResponse,
     ): TransactionNotifyVO {
         try {
-            wechatPayService.transferNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+            wechatPayAggregatedPayment.transferNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
         } catch (e: Exception) {
             response.sendError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),

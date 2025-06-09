@@ -15,7 +15,7 @@
         <module>triones-aggregated-payment-spring-boot-starter-rest-wechatpay</module>
         <module>triones-aggregated-payment-spring-boot-starter-rest-alipay</module>
         <module>triones-aggregated-payment-wechatpay</module>
-        <module>triones-aggregated-payment-spring-boot-starter</module>
+        <module>triones-aggregated-payment-spring</module>
         <module>triones-aggregated-payment-dependencies</module>
     </modules>
 
