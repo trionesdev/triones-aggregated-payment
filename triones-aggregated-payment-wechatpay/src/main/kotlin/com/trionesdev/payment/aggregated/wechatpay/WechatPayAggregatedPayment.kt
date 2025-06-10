@@ -1,6 +1,6 @@
 package com.trionesdev.payment.aggregated.wechatpay
 
-import com.trionesdev.payment.aggregated.AggregatedPayment
+import com.trionesdev.payment.aggregated.AbstractAggregatedPayment
 import com.trionesdev.payment.aggregated.AggregatedPaymentNotifyCallback
 import com.trionesdev.payment.aggregated.PaymentComponent
 import com.trionesdev.payment.aggregated.shared.enums.Channel
@@ -17,7 +17,7 @@ import java.time.Instant
 class WechatPayAggregatedPayment(
     var wechatpay: WechatPay?,
     var aggregatedPaymentNotify: AggregatedPaymentNotifyCallback?
-) : AggregatedPayment() {
+) : AbstractAggregatedPayment() {
 
 
     override fun createOrder(request: CreateOrderRequest): CreateOrderResponse {

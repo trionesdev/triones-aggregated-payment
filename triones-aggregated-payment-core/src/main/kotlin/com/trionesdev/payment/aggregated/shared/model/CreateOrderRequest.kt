@@ -40,5 +40,6 @@ class CreateOrderRequest {
      * 订单包含的商品列表信息
      */
     var goodsDetail:List<GoodsDetail>? = null
+    var payer: Payer? = null
     var extra: Map<String, Any>? = null
 }

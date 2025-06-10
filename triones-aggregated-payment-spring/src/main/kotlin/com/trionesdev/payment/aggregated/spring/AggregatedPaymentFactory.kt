@@ -1,6 +1,6 @@
 package com.trionesdev.payment.aggregated.spring
 
-import com.trionesdev.payment.aggregated.AggregatedPayment
+import com.trionesdev.payment.aggregated.AbstractAggregatedPayment
 import com.trionesdev.payment.aggregated.PaymentComponent
 import com.trionesdev.payment.aggregated.shared.model.CloseOrderRequest
 import com.trionesdev.payment.aggregated.shared.model.CreateOrderRequest
@@ -15,14 +15,14 @@ import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.stereotype.Component
 
 @Component
-class AggregatedPaymentFactory(var aggregatedPayments: List<AggregatedPayment>) {
+class AggregatedPaymentFactory(var abstractAggregatedPayments: List<AbstractAggregatedPayment>) {
 
-    var aggregatedPaymentsMap: MutableMap<String, AggregatedPayment> = HashMap()
+    var aggregatedPaymentsMap: MutableMap<String, AbstractAggregatedPayment> = HashMap()
 
     @PostConstruct
     fun init() {
-        if (CollectionUtils.isNotEmpty(aggregatedPayments)) {
-           for ( payment in aggregatedPayments) {
+        if (CollectionUtils.isNotEmpty(abstractAggregatedPayments)) {
+           for ( payment in abstractAggregatedPayments) {
                val paymentComponent =
                    AnnotationUtils.getAnnotation(payment.javaClass, PaymentComponent::class.java)
                paymentComponent?.let { component ->

@@ -17,6 +17,7 @@
         <module>triones-aggregated-payment-wechatpay</module>
         <module>triones-aggregated-payment-spring</module>
         <module>triones-aggregated-payment-dependencies</module>
+        <module>triones-aggregated-payment-spring-boot-starter</module>
     </modules>
 
     <properties>

@@ -33,7 +33,7 @@ object CreateOrderRequestConvert {
         h5Request.timeExpire = timeFormat(request.timeExpire)
         h5Request.attach = request.attach
         h5Request.notifyUrl = request.notifyUrl
-        return h5Request;
+        return h5Request
     }
 
     fun jsapi(request: CreateOrderRequest): WechatPayJsApiCreateOrderRequest {

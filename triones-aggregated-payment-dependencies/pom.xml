@@ -41,6 +41,11 @@
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.payment</groupId>
+                <artifactId>triones-aggregated-payment-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.trionesdev.payment</groupId>
                 <artifactId>triones-aggregated-payment-spring-boot-starter-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
