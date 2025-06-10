@@ -2,6 +2,7 @@ package com.trionesdev.payment.aggregated.wechatpay
 
 import com.trionesdev.payment.aggregated.shared.model.CreateOrderRequest
 import com.trionesdev.payment.aggregated.shared.model.Money
+import com.trionesdev.payment.aggregated.shared.model.Payer
 import com.trionesdev.payment.wechatpay.v3.model.Amount
 import com.trionesdev.payment.wechatpay.v3.payment.app.model.WechatPayAppCreateOrderRequest
 import com.trionesdev.payment.wechatpay.v3.payment.h5.model.WechatPayH5CreateOrderRequest
@@ -21,6 +22,12 @@ object CreateOrderRequestConvert {
             return null
         }
         return Amount(money.amount?.toInt(), money.currency?.name)
+    }
+
+    fun payer(payer: Payer?): com.trionesdev.payment.wechatpay.v3.model.Payer {
+        var p = com.trionesdev.payment.wechatpay.v3.model.Payer()
+        p.openId = payer?.openId
+        return p;
     }
 
     fun h5(request: CreateOrderRequest): WechatPayH5CreateOrderRequest {
@@ -45,6 +52,7 @@ object CreateOrderRequestConvert {
         jsapiRequest.amount = moneyToAmount(request.amount)
         jsapiRequest.timeExpire = timeFormat(request.timeExpire)
         jsapiRequest.attach = request.attach
+        jsapiRequest.payer = payer(request.payer)
         jsapiRequest.notifyUrl = request.notifyUrl
         return jsapiRequest;
     }
