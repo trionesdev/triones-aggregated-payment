@@ -8,6 +8,7 @@ import com.trionesdev.payment.wechatpay.v3.payment.app.model.WechatPayAppCreateO
 import com.trionesdev.payment.wechatpay.v3.payment.h5.model.WechatPayH5CreateOrderRequest
 import com.trionesdev.payment.wechatpay.v3.payment.jsapi.model.WechatPayJsApiCreateOrderRequest
 import com.trionesdev.payment.wechatpay.v3.payment.nativepay.model.WechatPayNativeCreateOrderRequest
+import java.math.BigDecimal
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
@@ -21,13 +22,13 @@ object CreateOrderRequestConvert {
         if (money == null) {
             return null
         }
-        return Amount(money.amount?.toInt(), money.currency?.name)
+        return Amount(money.amount!!.multiply(BigDecimal.valueOf(100)).toInt(), money.currency?.name)
     }
 
-    fun payer(payer: Payer?): com.trionesdev.payment.wechatpay.v3.model.Payer {
-        var p = com.trionesdev.payment.wechatpay.v3.model.Payer()
+    fun toWechatPayer(payer: Payer?): com.trionesdev.payment.wechatpay.v3.model.Payer {
+        val p = com.trionesdev.payment.wechatpay.v3.model.Payer()
         p.openId = payer?.openId
-        return p;
+        return p
     }
 
     fun h5(request: CreateOrderRequest): WechatPayH5CreateOrderRequest {
@@ -52,7 +53,7 @@ object CreateOrderRequestConvert {
         jsapiRequest.amount = moneyToAmount(request.amount)
         jsapiRequest.timeExpire = timeFormat(request.timeExpire)
         jsapiRequest.attach = request.attach
-        jsapiRequest.payer = payer(request.payer)
+        jsapiRequest.payer = toWechatPayer(request.payer)
         jsapiRequest.notifyUrl = request.notifyUrl
         return jsapiRequest;
     }
@@ -66,6 +67,7 @@ object CreateOrderRequestConvert {
         appRequest.amount = moneyToAmount(request.amount)
         appRequest.timeExpire = timeFormat(request.timeExpire)
         appRequest.attach = request.attach
+        appRequest.payer = toWechatPayer(request.payer)
         appRequest.notifyUrl = request.notifyUrl
         return appRequest;
     }
@@ -79,6 +81,7 @@ object CreateOrderRequestConvert {
         nativeRequest.amount = moneyToAmount(request.amount)
         nativeRequest.timeExpire = timeFormat(request.timeExpire)
         nativeRequest.attach = request.attach
+
         nativeRequest.notifyUrl = request.notifyUrl
         return nativeRequest;
     }

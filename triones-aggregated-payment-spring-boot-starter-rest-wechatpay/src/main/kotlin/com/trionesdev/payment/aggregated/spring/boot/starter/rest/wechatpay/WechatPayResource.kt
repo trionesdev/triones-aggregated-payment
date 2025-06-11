@@ -2,16 +2,19 @@ package com.trionesdev.payment.aggregated.spring.boot.starter.rest.wechatpay
 
 import com.trionesdev.payment.aggregated.wechatpay.WechatPayAggregatedPayment
 import com.trionesdev.payment.util.JsonUtils
-import com.trionesdev.payment.wechatpay.v3.model.notify.WechatPayNotifyParseRequest
+import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import kotlin.math.log
 
 @RestController
 @RequestMapping("rest-api/payment/wechatpay")
 class WechatPayResource(
     var wechatPayAggregatedPayment: WechatPayAggregatedPayment
 ) {
+    val logger = LoggerFactory.getLogger(WechatPayResource::class.java)
 
     /**
      * 微信支付回调
@@ -26,8 +29,15 @@ class WechatPayResource(
         @RequestBody body: String
     ): TransactionNotifyVO {
         try {
-            wechatPayAggregatedPayment.transactionNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+            wechatPayAggregatedPayment.transactionNotify(WechatPayNotifyParseRequest().apply {
+                this.nonce = nonce
+                this.signature = signature
+                this.timestamp = timestamp
+                this.serial = serial
+                this.body = body
+            })
         } catch (e: Exception) {
+            logger.error(e.message, e)
             response.sendError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 JsonUtils.writeValueAsString(
@@ -53,8 +63,17 @@ class WechatPayResource(
         response: HttpServletResponse,
     ): TransactionNotifyVO {
         try {
-            wechatPayAggregatedPayment.refundNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+            wechatPayAggregatedPayment.refundNotify(
+                WechatPayNotifyParseRequest().apply {
+                    this.nonce = nonce
+                    this.signature = signature
+                    this.timestamp = timestamp
+                    this.serial = serial
+                    this.body = body
+                }
+            )
         } catch (e: Exception) {
+            logger.error(e.message, e)
             response.sendError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 JsonUtils.writeValueAsString(
@@ -80,9 +99,19 @@ class WechatPayResource(
         @RequestBody body: String,
         response: HttpServletResponse,
     ): TransactionNotifyVO {
+
         try {
-            wechatPayAggregatedPayment.transferNotify(WechatPayNotifyParseRequest(nonce, signature, timestamp, serial, body))
+            wechatPayAggregatedPayment.transferNotify(
+                WechatPayNotifyParseRequest().apply {
+                    this.nonce = nonce
+                    this.signature = signature
+                    this.timestamp = timestamp
+                    this.serial = serial
+                    this.body = body
+                }
+            )
         } catch (e: Exception) {
+            logger.error(e.message, e)
             response.sendError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 JsonUtils.writeValueAsString(

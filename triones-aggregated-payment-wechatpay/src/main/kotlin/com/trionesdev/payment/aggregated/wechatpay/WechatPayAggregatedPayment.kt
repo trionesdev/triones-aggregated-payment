@@ -8,7 +8,7 @@ import com.trionesdev.payment.aggregated.shared.enums.Currency
 import com.trionesdev.payment.aggregated.shared.enums.Scene
 import com.trionesdev.payment.aggregated.shared.model.*
 import com.trionesdev.payment.wechatpay.v3.WechatPay
-import com.trionesdev.payment.wechatpay.v3.model.notify.WechatPayNotifyParseRequest
+import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
 import com.trionesdev.payment.wechatpay.v3.payment.model.WechatPayCloseOrderRequest
 import java.math.BigDecimal
 import java.time.Instant
@@ -21,29 +21,44 @@ class WechatPayAggregatedPayment(
 
 
     override fun createOrder(request: CreateOrderRequest): CreateOrderResponse {
-        var response: Any? = null;
+        var response: Map<String, Any?>? = null;
         when (request.scene) {
             Scene.M_WEB -> {
-                response = wechatpay!!.payment.h5.createOrder(CreateOrderRequestConvert.h5(request))
+                val h5Res = wechatpay!!.payment.h5.createOrder(CreateOrderRequestConvert.h5(request))
+                response = mapOf("h5Url" to h5Res.h5Url)
             }
 
             Scene.PC_WEB -> {
-                response = wechatpay!!.payment?.native?.createOrder(CreateOrderRequestConvert.native(request))
+                val webRes = wechatpay!!.payment.native.createOrder(CreateOrderRequestConvert.native(request))
+                response = mapOf<String, Any?>("codeUrl" to webRes?.codeUrl)
             }
 
-            Scene.WEB_JSAPI -> {
-                response =
-                    wechatpay!!.payment.jsApi.createOrderWithRequestPayment(CreateOrderRequestConvert.jsapi(request))
-            }
 
             Scene.APP -> {
-                wechatpay!!.payment?.app?.createOrderWithRequestPayment(CreateOrderRequestConvert.app(request))
+                val appRes =
+                    wechatpay!!.payment.app.createOrderWithRequestPayment(CreateOrderRequestConvert.app(request))
+                response = mapOf(
+                    "appId" to appRes.appId,
+                    "timeStamp" to appRes.timeStamp,
+                    "nonceStr" to appRes.nonceStr,
+                    "packageStr" to appRes.packageStr,
+                    "paySign" to appRes.paySign,
+                    "signType" to appRes.signType
+                )
             }
 
+            Scene.WEB_JSAPI,
             Scene.MINI_PROGRAM -> {
-                println("ssssssss")
-                response =
+                val jsApiRes =
                     wechatpay!!.payment.jsApi.createOrderWithRequestPayment(CreateOrderRequestConvert.jsapi(request))
+                response = mapOf(
+                    "appId" to jsApiRes.appId,
+                    "timeStamp" to jsApiRes.timeStamp,
+                    "nonceStr" to jsApiRes.nonceStr,
+                    "packageStr" to jsApiRes.packageStr,
+                    "paySign" to jsApiRes.paySign,
+                    "signType" to jsApiRes.signType
+                )
             }
 
             Scene.PAYMENT_CODE,
@@ -55,9 +70,10 @@ class WechatPayAggregatedPayment(
     }
 
     override fun closeOrder(request: CloseOrderRequest) {
-        val req = WechatPayCloseOrderRequest()
-        req.mchId = request.merchantId
-        req.outTradeNo = request.outTradeNo
+        val req = WechatPayCloseOrderRequest().apply {
+            this.mchId = request.merchantId
+            this.outTradeNo = request.outTradeNo
+        }
         wechatpay!!.payment.closeOrder(req)
     }
 
@@ -70,55 +86,64 @@ class WechatPayAggregatedPayment(
         val response = wechatpay!!.operation.createTransfer(ConvertUtils.createTransferRequestToWechatPay(request))
         return ConvertUtils.createTransferResponseFromWechatPay(response)
     }
-
-
+    
     fun transactionNotify(request: WechatPayNotifyParseRequest) {
         val response = wechatpay!!.payment.transactionNotify(request)
-        val processArgs = TransactionNotifyArgs()
-        processArgs.channel = Channel.WECHAT_PAY.name
-        processArgs.tradeNo = response.transactionId
-        processArgs.outTradeNo = response.outTradeNo
-        processArgs.attach = response.attach
-        processArgs.amount = TransactionAmount(
-            Money(BigDecimal(response.amount.total), Currency.fromString(response.amount.currency, Currency.CNY)),
-            Money(
-                BigDecimal(response.amount.currency),
-                Currency.fromString(response.amount.payerCurrency, Currency.CNY)
-            )
-        )
-        processArgs.successTime = Instant.parse(response.successTime)
-        processArgs.original = response
+        val processArgs = TransactionNotifyArgs().apply {
+            this.channel = Channel.WECHAT_PAY.name
+            this.tradeNo = response.transactionId
+            this.outTradeNo = response.outTradeNo
+            this.attach = response.attach
+            this.amount = TransactionAmount().apply {
+                this.total = Money().apply {
+                    this.amount = BigDecimal(response.amount.total)
+                    this.currency = Currency.fromString(response.amount.currency, Currency.CNY)
+                }
+                this.payerTotal = Money().apply {
+                    this.amount = BigDecimal(response.amount.payerTotal)
+                    this.currency = Currency.fromString(response.amount.payerCurrency, Currency.CNY)
+                }
+            }
+            this.successTime = Instant.parse(response.successTime)
+            this.original = response
+        }
         aggregatedPaymentNotify?.transactionNotifyProcess(processArgs)
     }
 
     fun refundNotify(request: WechatPayNotifyParseRequest) {
         val response = wechatpay!!.payment.refundNotify(request)
-        val processArgs = RefundNotifyArgs()
-        processArgs.channel = Channel.WECHAT_PAY.name
-        processArgs.tradeNo = response.transactionId
-        processArgs.outTradeNo = response.outTradeNo
-        processArgs.refundNo = response.refundId
-        processArgs.outRefundNo = response.outRefundNo
+        val processArgs = RefundNotifyArgs().apply {
+            this.channel = Channel.WECHAT_PAY.name
+            this.tradeNo = response.transactionId
+            this.outTradeNo = response.outTradeNo
+            this.refundNo = response.refundId
+            this.outRefundNo = response.outRefundNo
 
-        processArgs.amount = TransactionAmount(
-            Money(BigDecimal(response.amount.total), Currency.fromString(response.amount.currency, Currency.CNY)),
-            Money(
-                BigDecimal(response.amount.currency),
-                Currency.fromString(response.amount.payerCurrency, Currency.CNY)
+            this.amount = TransactionAmount(
+                Money().apply {
+                    this.amount = BigDecimal(response.amount.total)
+                    this.currency = Currency.fromString(response.amount.currency, Currency.CNY)
+                },
+                Money().apply {
+                    this.amount = BigDecimal(response.amount.payerTotal)
+                    this.currency = Currency.fromString(response.amount.payerCurrency, Currency.CNY)
+                }
             )
-        )
-        processArgs.successTime = Instant.parse(response.successTime)
-        processArgs.original = response
+            this.successTime = Instant.parse(response.successTime)
+            this.original = response
+        }
+
         aggregatedPaymentNotify?.refundNotifyProcess(processArgs)
     }
 
     fun transferNotify(request: WechatPayNotifyParseRequest) {
         val response = wechatpay!!.operation.transferNotify(request)
-        val processArgs = TransferNotifyArgs()
-        processArgs.channel = Channel.WECHAT_PAY.name
-        processArgs.billNo = response.transferBillNo
-        processArgs.outBillNo = response.outBillNo
-        processArgs.original = response
+        val processArgs = TransferNotifyArgs().apply {
+            this.channel = Channel.WECHAT_PAY.name
+            this.billNo = response.transferBillNo
+            this.outBillNo = response.outBillNo
+            this.original = response
+        }
         aggregatedPaymentNotify?.transferNotifyProcess(processArgs)
     }
 }

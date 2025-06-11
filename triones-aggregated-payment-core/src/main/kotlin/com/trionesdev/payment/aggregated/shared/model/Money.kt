@@ -18,4 +18,26 @@ class Money {
         this.amount = amount
         this.currency = currency
     }
+
+    companion object {
+        @JvmStatic
+        fun builder(): Builder {
+            return Builder()
+        }
+    }
+
+    class Builder {
+        var money: Money = Money()
+        fun amount(amount: BigDecimal) = apply {
+            money.amount = amount
+        }
+
+        fun currency(currency: Currency) = apply {
+            money.currency = currency
+        }
+
+        fun build(): Money {
+            return money
+        }
+    }
 }
