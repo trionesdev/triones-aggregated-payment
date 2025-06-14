@@ -13,24 +13,24 @@ class CreateRefundResponse {
         }
     }
 
-    class Build {
+    class Builder {
         var response: CreateRefundResponse = CreateRefundResponse()
-        fun refundNo(refundNo: String): Build {
+        fun refundNo(refundNo: String): Builder {
             response.refundNo = refundNo
             return this
         }
 
-        fun outRefundNo(outRefundNo: String): Build {
+        fun outRefundNo(outRefundNo: String): Builder {
             response.outRefundNo = outRefundNo
             return this
         }
 
-        fun tradeNo(tradeNo: String): Build {
+        fun tradeNo(tradeNo: String): Builder {
             response.tradeNo = tradeNo
             return this
         }
 
-        fun outTradeNo(outTradeNo: String): Build {
+        fun outTradeNo(outTradeNo: String): Builder {
             response.outTradeNo = outTradeNo
             return this
         }

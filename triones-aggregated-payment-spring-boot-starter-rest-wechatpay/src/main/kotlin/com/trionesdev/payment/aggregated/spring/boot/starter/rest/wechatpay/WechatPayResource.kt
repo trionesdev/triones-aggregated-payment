@@ -2,7 +2,7 @@ package com.trionesdev.payment.aggregated.spring.boot.starter.rest.wechatpay
 
 import com.trionesdev.payment.aggregated.wechatpay.WechatPayAggregatedPaymentChannel
 import com.trionesdev.payment.util.JsonUtils
-import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
+import com.trionesdev.payment.wechatpay.v3.model.notify.WechatPayNotifyParseRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
