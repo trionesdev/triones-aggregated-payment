@@ -6,6 +6,13 @@ class CreateRefundResponse {
     var tradeNo: String? = null
     var outTradeNo: String? = null
 
+    companion object {
+        @JvmStatic
+        fun builder(): Builder {
+            return Builder()
+        }
+    }
+
     class Build {
         var response: CreateRefundResponse = CreateRefundResponse()
         fun refundNo(refundNo: String): Build {

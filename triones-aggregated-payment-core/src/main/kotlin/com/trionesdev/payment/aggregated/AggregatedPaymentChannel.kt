@@ -2,7 +2,7 @@ package com.trionesdev.payment.aggregated
 
 import com.trionesdev.payment.aggregated.shared.model.*
 
-abstract class AbstractAggregatedPayment {
+abstract class AggregatedPaymentChannel {
     /**
      * 创建支付订单
      */

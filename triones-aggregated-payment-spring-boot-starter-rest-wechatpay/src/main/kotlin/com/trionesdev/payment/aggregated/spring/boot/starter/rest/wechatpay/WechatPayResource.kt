@@ -1,18 +1,17 @@
 package com.trionesdev.payment.aggregated.spring.boot.starter.rest.wechatpay
 
-import com.trionesdev.payment.aggregated.wechatpay.WechatPayAggregatedPayment
+import com.trionesdev.payment.aggregated.wechatpay.WechatPayAggregatedPaymentChannel
 import com.trionesdev.payment.util.JsonUtils
 import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import kotlin.math.log
 
 @RestController
 @RequestMapping("rest-api/payment/wechatpay")
 class WechatPayResource(
-    var wechatPayAggregatedPayment: WechatPayAggregatedPayment
+    var wechatPayAggregatedPayment: WechatPayAggregatedPaymentChannel
 ) {
     val logger = LoggerFactory.getLogger(WechatPayResource::class.java)
 

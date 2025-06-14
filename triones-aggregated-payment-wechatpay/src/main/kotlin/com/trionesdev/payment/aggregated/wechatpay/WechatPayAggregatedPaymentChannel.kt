@@ -1,6 +1,6 @@
 package com.trionesdev.payment.aggregated.wechatpay
 
-import com.trionesdev.payment.aggregated.AbstractAggregatedPayment
+import com.trionesdev.payment.aggregated.AggregatedPaymentChannel
 import com.trionesdev.payment.aggregated.AggregatedPaymentNotifyCallback
 import com.trionesdev.payment.aggregated.PaymentComponent
 import com.trionesdev.payment.aggregated.shared.enums.Channel
@@ -8,16 +8,16 @@ import com.trionesdev.payment.aggregated.shared.enums.Currency
 import com.trionesdev.payment.aggregated.shared.enums.Scene
 import com.trionesdev.payment.aggregated.shared.model.*
 import com.trionesdev.payment.wechatpay.v3.WechatPay
-import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
+import com.trionesdev.payment.wechatpay.v3.model.notify.WechatPayNotifyParseRequest
 import com.trionesdev.payment.wechatpay.v3.payment.model.WechatPayCloseOrderRequest
 import java.math.BigDecimal
 import java.time.Instant
 
 @PaymentComponent(channel = "WECHAT_PAY")
-class WechatPayAggregatedPayment(
+class WechatPayAggregatedPaymentChannel(
     var wechatpay: WechatPay?,
     var aggregatedPaymentNotify: AggregatedPaymentNotifyCallback?
-) : AbstractAggregatedPayment() {
+) : AggregatedPaymentChannel() {
 
 
     override fun createOrder(request: CreateOrderRequest): CreateOrderResponse {

@@ -15,6 +15,13 @@ class CreateRefundRequest {
     var reason: String? = null
     var notifyUrl: String? = null
 
+    companion object  {
+        @JvmStatic
+        fun builder(): Builder {
+            return Builder()
+        }
+    }
+
     class Builder {
         var request: CreateRefundRequest = CreateRefundRequest()
 

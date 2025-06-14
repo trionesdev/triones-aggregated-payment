@@ -1,6 +1,6 @@
 package com.trionesdev.payment.aggregated.spring
 
-import com.trionesdev.payment.aggregated.AbstractAggregatedPayment
+import com.trionesdev.payment.aggregated.AggregatedPaymentChannel
 import com.trionesdev.payment.aggregated.PaymentComponent
 import com.trionesdev.payment.aggregated.shared.model.CloseOrderRequest
 import com.trionesdev.payment.aggregated.shared.model.CreateOrderRequest
@@ -15,36 +15,36 @@ import org.springframework.core.annotation.AnnotationUtils
 import org.springframework.stereotype.Component
 
 @Component
-class AggregatedPaymentFactory(var abstractAggregatedPayments: List<AbstractAggregatedPayment>) {
+class AggregatedPaymentFactory(var aggregatedPaymentChannels: List<AggregatedPaymentChannel>) {
 
-    var aggregatedPaymentsMap: MutableMap<String, AbstractAggregatedPayment> = HashMap()
+    var channelsMap: MutableMap<String, AggregatedPaymentChannel> = HashMap()
 
     @PostConstruct
     fun init() {
-        if (CollectionUtils.isNotEmpty(abstractAggregatedPayments)) {
-           for ( payment in abstractAggregatedPayments) {
+        if (CollectionUtils.isNotEmpty(aggregatedPaymentChannels)) {
+           for ( payment in aggregatedPaymentChannels) {
                val paymentComponent =
                    AnnotationUtils.getAnnotation(payment.javaClass, PaymentComponent::class.java)
                paymentComponent?.let { component ->
-                   aggregatedPaymentsMap.put(component.channel, payment)
+                   channelsMap.put(component.channel, payment)
                }
            }
         }
     }
 
     fun createOrder(request: CreateOrderRequest): CreateOrderResponse {
-        return aggregatedPaymentsMap[request.channel!!]!!.createOrder(request)
+        return channelsMap[request.channel!!]!!.createOrder(request)
     }
 
     fun closeOrder(request: CloseOrderRequest) {
-        aggregatedPaymentsMap[request.channel!!]!!.closeOrder(request)
+        channelsMap[request.channel!!]!!.closeOrder(request)
     }
 
     fun createRefund(request: CreateRefundRequest): CreateRefundResponse {
-        return aggregatedPaymentsMap[request.channel!!]!!.createRefund(request)
+        return channelsMap[request.channel!!]!!.createRefund(request)
     }
 
     fun createTransfer(request: CreateTransferRequest): CreateTransferResponse {
-        return aggregatedPaymentsMap[request.channel!!]!!.createTransfer(request)
+        return channelsMap[request.channel!!]!!.createTransfer(request)
     }
 }

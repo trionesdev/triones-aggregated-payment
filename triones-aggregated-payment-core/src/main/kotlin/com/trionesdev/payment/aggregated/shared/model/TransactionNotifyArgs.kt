@@ -37,4 +37,54 @@ class TransactionNotifyArgs {
      * 交易信息(第三方支付的交易信息)
      */
     var original: Any? = null
+
+    companion object {
+        @JvmStatic
+        fun builder(): Builder {
+            return Builder()
+        }
+    }
+
+    class Builder {
+        private var transactionNotifyArgs: TransactionNotifyArgs = TransactionNotifyArgs()
+
+        fun channel(channel: String?): Builder {
+            transactionNotifyArgs.channel = channel
+            return this
+        }
+
+        fun tradeNo(tradeNo: String?): Builder {
+            transactionNotifyArgs.tradeNo = tradeNo
+            return this
+        }
+
+        fun outTradeNo(outTradeNo: String?): Builder {
+            transactionNotifyArgs.outTradeNo = outTradeNo
+            return this
+        }
+
+        fun attach(attach: String?): Builder {
+            transactionNotifyArgs.attach = attach
+            return this
+        }
+
+        fun amount(amount: TransactionAmount?): Builder {
+            transactionNotifyArgs.amount = amount
+            return this
+        }
+
+        fun successTime(successTime: Instant?): Builder {
+            transactionNotifyArgs.successTime = successTime
+            return this
+        }
+
+        fun original(original: Any?): Builder {
+            transactionNotifyArgs.original = original
+            return this
+        }
+
+        fun build(): TransactionNotifyArgs {
+            return transactionNotifyArgs
+        }
+    }
 }

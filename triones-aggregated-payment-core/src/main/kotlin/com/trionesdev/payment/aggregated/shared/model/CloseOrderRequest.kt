@@ -17,6 +17,13 @@ class CloseOrderRequest {
     var outTradeNo: String? = null
     var merchantId: String? = null
 
+    companion object  {
+        @JvmStatic
+        fun builder(): Builder {
+            return Builder()
+        }
+    }
+
     class Builder {
         var request: CloseOrderRequest = CloseOrderRequest()
         fun channel(channel: String): Builder {
