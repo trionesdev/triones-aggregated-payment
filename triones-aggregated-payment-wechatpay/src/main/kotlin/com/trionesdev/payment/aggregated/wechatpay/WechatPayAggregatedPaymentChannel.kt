@@ -86,7 +86,7 @@ class WechatPayAggregatedPaymentChannel(
         val response = wechatpay!!.operation.createTransfer(ConvertUtils.createTransferRequestToWechatPay(request))
         return ConvertUtils.createTransferResponseFromWechatPay(response)
     }
-    
+
     fun transactionNotify(request: WechatPayNotifyParseRequest) {
         val response = wechatpay!!.payment.transactionNotify(request)
         val processArgs = TransactionNotifyArgs().apply {
@@ -96,11 +96,11 @@ class WechatPayAggregatedPaymentChannel(
             this.attach = response.attach
             this.amount = TransactionAmount().apply {
                 this.total = Money().apply {
-                    this.amount = BigDecimal(response.amount.total)
+                    this.amount = BigDecimal(response.amount.total).divide(BigDecimal("100"))
                     this.currency = Currency.fromString(response.amount.currency, Currency.CNY)
                 }
                 this.payerTotal = Money().apply {
-                    this.amount = BigDecimal(response.amount.payerTotal)
+                    this.amount = BigDecimal(response.amount.payerTotal).divide(BigDecimal("100"))
                     this.currency = Currency.fromString(response.amount.payerCurrency, Currency.CNY)
                 }
             }
