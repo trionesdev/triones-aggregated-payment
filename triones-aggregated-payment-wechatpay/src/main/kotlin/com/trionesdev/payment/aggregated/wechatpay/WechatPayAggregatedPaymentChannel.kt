@@ -8,8 +8,8 @@ import com.trionesdev.payment.aggregated.shared.enums.Currency
 import com.trionesdev.payment.aggregated.shared.enums.Scene
 import com.trionesdev.payment.aggregated.shared.model.*
 import com.trionesdev.payment.wechatpay.v3.WechatPay
-import com.trionesdev.payment.wechatpay.v3.model.notify.WechatPayNotifyParseRequest
 import com.trionesdev.payment.wechatpay.v3.payment.model.WechatPayCloseOrderRequest
+import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
 import java.math.BigDecimal
 import java.time.Instant
 

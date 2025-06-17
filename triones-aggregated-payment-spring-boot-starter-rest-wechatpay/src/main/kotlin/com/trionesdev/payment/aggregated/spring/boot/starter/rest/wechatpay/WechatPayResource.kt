@@ -2,8 +2,9 @@ package com.trionesdev.payment.aggregated.spring.boot.starter.rest.wechatpay
 
 import com.trionesdev.payment.aggregated.wechatpay.WechatPayAggregatedPaymentChannel
 import com.trionesdev.payment.util.JsonUtils
-import com.trionesdev.payment.wechatpay.v3.model.notify.WechatPayNotifyParseRequest
+import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*
 class WechatPayResource(
     var wechatPayAggregatedPayment: WechatPayAggregatedPaymentChannel
 ) {
-    val logger = LoggerFactory.getLogger(WechatPayResource::class.java)
+    val logger: Logger? = LoggerFactory.getLogger(WechatPayResource::class.java)
 
     /**
      * 微信支付回调
@@ -36,7 +37,7 @@ class WechatPayResource(
                 this.body = body
             })
         } catch (e: Exception) {
-            logger.error(e.message, e)
+            logger?.error(e.message, e)
             response.sendError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 JsonUtils.writeValueAsString(
@@ -72,7 +73,7 @@ class WechatPayResource(
                 }
             )
         } catch (e: Exception) {
-            logger.error(e.message, e)
+            logger?.error(e.message, e)
             response.sendError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 JsonUtils.writeValueAsString(
@@ -110,7 +111,7 @@ class WechatPayResource(
                 }
             )
         } catch (e: Exception) {
-            logger.error(e.message, e)
+            logger?.error(e.message, e)
             response.sendError(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                 JsonUtils.writeValueAsString(
