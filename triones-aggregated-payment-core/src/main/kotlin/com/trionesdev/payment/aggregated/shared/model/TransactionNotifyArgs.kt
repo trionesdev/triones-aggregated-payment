@@ -26,7 +26,12 @@ class TransactionNotifyArgs {
     /**
      * 金额
      */
-    var amount: TransactionAmount? = null
+    var totalAmount: Money? = null
+
+    /**
+     * 实际支付金额
+     */
+    var payerAmount: Money? = null
 
     /**
      * 成功时间
@@ -68,8 +73,13 @@ class TransactionNotifyArgs {
             return this
         }
 
-        fun amount(amount: TransactionAmount?): Builder {
-            transactionNotifyArgs.amount = amount
+        fun totalAmount(totalAmount: Money?): Builder {
+            transactionNotifyArgs.totalAmount = totalAmount
+            return this
+        }
+
+        fun payerAmount(payerAmount: Money?): Builder {
+            transactionNotifyArgs.payerAmount = payerAmount
             return this
         }
 

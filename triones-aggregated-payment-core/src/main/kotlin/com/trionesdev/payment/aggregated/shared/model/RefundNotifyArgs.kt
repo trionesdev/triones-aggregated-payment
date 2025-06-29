@@ -14,7 +14,7 @@ class RefundNotifyArgs {
     var tradeNo: String? = null
 
     /**
-     * 商户系统交易号
+     * 本地系统交易号
      */
     var outTradeNo: String? = null
 
@@ -24,14 +24,18 @@ class RefundNotifyArgs {
     var refundNo: String? = null
 
     /**
-     * 商家退款单号
+     * 本地退款单号
      */
     var outRefundNo: String? = null
 
     /**
-     * 金额
+     * 退款金额
      */
-    var amount: TransactionAmount? = null
+    var refundAmount: Money? = null
+    /**
+     * 实际退款金额
+     */
+    var payerRefundAmount: Money? = null
 
     /**
      * 成功时间
@@ -74,8 +78,13 @@ class RefundNotifyArgs {
             return this
         }
 
-        fun amount(amount: TransactionAmount?): Builder {
-            refundNotifyArgs.amount = amount
+        fun refundAmount(refundAmount: Money?): Builder {
+            refundNotifyArgs.refundAmount = refundAmount
+            return this
+        }
+
+        fun payerRefundAmount(payerRefundAmount: Money?): Builder {
+            refundNotifyArgs.payerRefundAmount = payerRefundAmount
             return this
         }
 

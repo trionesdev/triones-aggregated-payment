@@ -12,8 +12,22 @@ class CreateRefundRequest {
      * 商户自定义订单ID
      */
     var outTradeNo: String? = null
+
+    /**
+     * 商户内部退款单号
+     */
+    var outRefundNo: String? = null
     var reason: String? = null
     var notifyUrl: String? = null
+
+    /**
+     * 退款金额
+     */
+    var refundAmount : Money? = null
+    /**
+     * 原订单总金额
+     */
+    var totalAmount : Money? = null
 
     companion object  {
         @JvmStatic
@@ -41,6 +55,11 @@ class CreateRefundRequest {
             return this
         }
 
+        fun outRefundNo(outRefundNo: String): Builder {
+            request.outRefundNo = outRefundNo
+            return this
+        }
+
         fun reason(reason: String): Builder {
             request.reason = reason
             return this
@@ -48,6 +67,17 @@ class CreateRefundRequest {
 
         fun notifyUrl(notifyUrl: String): Builder {
             request.notifyUrl = notifyUrl
+            return this
+        }
+
+
+        fun refundAmount(refundAmount: Money): Builder {
+            request.refundAmount = refundAmount
+            return this
+        }
+
+        fun totalAmount(totalAmount: Money): Builder {
+            request.totalAmount = totalAmount
             return this
         }
 

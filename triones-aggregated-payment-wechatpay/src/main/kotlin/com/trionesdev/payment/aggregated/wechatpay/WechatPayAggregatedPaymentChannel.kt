@@ -94,16 +94,19 @@ class WechatPayAggregatedPaymentChannel(
             this.tradeNo = response.transactionId
             this.outTradeNo = response.outTradeNo
             this.attach = response.attach
-            this.amount = TransactionAmount().apply {
-                this.total = Money().apply {
-                    this.amount = BigDecimal(response.amount.total).divide(BigDecimal("100"))
-                    this.currency = Currency.fromString(response.amount.currency, Currency.CNY)
-                }
-                this.payerTotal = Money().apply {
-                    this.amount = BigDecimal(response.amount.payerTotal).divide(BigDecimal("100"))
-                    this.currency = Currency.fromString(response.amount.payerCurrency, Currency.CNY)
+            this.totalAmount = response.amount?.total?.let {
+                Money().apply {
+                    this.amount = BigDecimal(it).divide(BigDecimal.valueOf(100))
+                    this.currency = Currency.fromString(response.amount?.currency, Currency.CNY)
                 }
             }
+            this.payerAmount = response.amount?.payerTotal?.let {
+                Money().apply {
+                    this.amount = BigDecimal(it).divide(BigDecimal.valueOf(100))
+                    this.currency = Currency.fromString(response.amount?.payerCurrency, Currency.CNY)
+                }
+            }
+
             this.successTime = Instant.parse(response.successTime)
             this.original = response
         }
@@ -118,17 +121,18 @@ class WechatPayAggregatedPaymentChannel(
             this.outTradeNo = response.outTradeNo
             this.refundNo = response.refundId
             this.outRefundNo = response.outRefundNo
-
-            this.amount = TransactionAmount(
+            this.refundAmount = response.amount?.refund?.let {
                 Money().apply {
-                    this.amount = BigDecimal(response.amount.total)
-                    this.currency = Currency.fromString(response.amount.currency, Currency.CNY)
-                },
-                Money().apply {
-                    this.amount = BigDecimal(response.amount.payerTotal)
-                    this.currency = Currency.fromString(response.amount.payerCurrency, Currency.CNY)
+                    this.amount = BigDecimal(it).divide(BigDecimal.valueOf(100))
+                    this.currency = Currency.fromString(response.amount?.currency, Currency.CNY)
                 }
-            )
+            }
+            this.payerRefundAmount = response.amount?.payerRefund?.let {
+                Money().apply {
+                    this.amount = BigDecimal(it).divide(BigDecimal.valueOf(100))
+                    this.currency = Currency.fromString(response.amount?.currency, Currency.CNY)
+                }
+            }
             this.successTime = Instant.parse(response.successTime)
             this.original = response
         }
