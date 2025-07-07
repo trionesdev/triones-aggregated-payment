@@ -1,13 +1,19 @@
 package com.trionesdev.payment.aggregated.shared.model
 
 class Payer {
-    var openId: String? = null
+    /**
+     * 标识
+     */
+    var identity: String? = null
+
+    /**
+     * 标识类型
+     */
+    var identityType: String? = null
 
     constructor()
 
-    constructor(openId: String?) {
-        this.openId = openId
-    }
+
 
     companion object {
         @JvmStatic
@@ -18,8 +24,12 @@ class Payer {
 
     class Builder {
         private var player: Payer = Payer()
-        fun openId(openId: String?) = apply {
-            player.openId = openId
+
+        fun identity(identity: String?) = apply {
+            player.identity = identity
+        }
+        fun identityType(identityType: String?) = apply {
+            player.identityType = identityType
         }
 
         fun build(): Payer {

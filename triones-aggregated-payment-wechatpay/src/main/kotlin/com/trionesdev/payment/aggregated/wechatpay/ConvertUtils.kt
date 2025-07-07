@@ -1,11 +1,8 @@
 package com.trionesdev.payment.aggregated.wechatpay
 
 import com.trionesdev.payment.aggregated.shared.enums.Currency
-import com.trionesdev.payment.aggregated.shared.model.CreateRefundRequest
-import com.trionesdev.payment.aggregated.shared.model.CreateRefundResponse
-import com.trionesdev.payment.aggregated.shared.model.CreateTransferRequest
-import com.trionesdev.payment.aggregated.shared.model.CreateTransferResponse
-import com.trionesdev.payment.aggregated.shared.model.Money
+import com.trionesdev.payment.aggregated.shared.model.*
+import com.trionesdev.payment.wechatpay.v3.operation.model.TransferSceneReportInfo
 import com.trionesdev.payment.wechatpay.v3.operation.model.WechatPayCreateTransferRequest
 import com.trionesdev.payment.wechatpay.v3.operation.model.WechatPayCreateTransferResponse
 import com.trionesdev.payment.wechatpay.v3.payment.model.ReqRefundAmount
@@ -65,7 +62,19 @@ object ConvertUtils {
         val wechatPayRequest = WechatPayCreateTransferRequest()
         wechatPayRequest.appId = request.appId
         wechatPayRequest.outBillNo = request.outBillNo
+        wechatPayRequest.transferSceneId = request.sceneId
+        wechatPayRequest.openId = request.payee?.identity
+        wechatPayRequest.userName = request.payee?.name
+        wechatPayRequest.transferAmount = request.amount?.amount?.divide(BigDecimal.valueOf(100))?.toInt()
+        wechatPayRequest.transferRemark = request.remark
         wechatPayRequest.notifyUrl = request.notifyUrl
+        wechatPayRequest.userRecvPerception = request.title
+        wechatPayRequest.transferSceneReportInfos = request.sceneReportInfos?.map {
+            TransferSceneReportInfo().apply {
+                this.infoType = it.type
+                this.infoContent = it.content
+            }
+        }
         return wechatPayRequest
     }
 

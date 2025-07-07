@@ -27,7 +27,7 @@ object CreateOrderRequestConvert {
 
     fun toWechatPayer(payer: Payer?): com.trionesdev.payment.wechatpay.v3.model.Payer {
         val p = com.trionesdev.payment.wechatpay.v3.model.Payer()
-        p.openId = payer?.openId
+        p.openId = payer?.identity
         return p
     }
 
