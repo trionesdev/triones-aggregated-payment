@@ -3,6 +3,8 @@ package com.trionesdev.payment.aggregated.wechatpay
 import com.trionesdev.payment.aggregated.shared.enums.Currency
 import com.trionesdev.payment.aggregated.shared.model.*
 import com.trionesdev.payment.wechatpay.v3.operation.model.TransferSceneReportInfo
+import com.trionesdev.payment.wechatpay.v3.operation.model.WechatPayCancelTransferRequest
+import com.trionesdev.payment.wechatpay.v3.operation.model.WechatPayCancelTransferResponse
 import com.trionesdev.payment.wechatpay.v3.operation.model.WechatPayCreateTransferRequest
 import com.trionesdev.payment.wechatpay.v3.operation.model.WechatPayCreateTransferResponse
 import com.trionesdev.payment.wechatpay.v3.payment.model.ReqRefundAmount
@@ -85,5 +87,17 @@ object ConvertUtils {
         createTransferResponse.extra = mapOf("packageInfo" to response.packageInfo)
         createTransferResponse.raw = response
         return createTransferResponse
+    }
+
+    fun cancelTransferRequestToWechatPay(request: CancelTransferRequest): WechatPayCancelTransferRequest {
+        val wechatPayCancelTransferRequest = WechatPayCancelTransferRequest()
+        wechatPayCancelTransferRequest.outBillNo = request.outBillNo
+        return wechatPayCancelTransferRequest
+    }
+
+    fun cancelTransferResponseFromWechatPay(response: WechatPayCancelTransferResponse): CancelTransferResponse {
+        val cancelTransferResponse = CancelTransferResponse()
+        cancelTransferResponse.outBillNo = response.outBillNo
+        return cancelTransferResponse
     }
 }

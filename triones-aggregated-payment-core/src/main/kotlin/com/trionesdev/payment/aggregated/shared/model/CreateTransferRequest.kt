@@ -1,7 +1,5 @@
 package com.trionesdev.payment.aggregated.shared.model
 
-import java.math.BigDecimal
-
 /**
  * 转账请求
  */

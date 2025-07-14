@@ -23,4 +23,9 @@ abstract class AggregatedPaymentChannel {
      */
     abstract fun createTransfer(request: CreateTransferRequest): CreateTransferResponse
 
+    /**
+     * 取消转账(商户对用户转账)
+     */
+    abstract fun cancelTransfer(request: CancelTransferRequest): CancelTransferResponse
+
 }

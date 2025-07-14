@@ -87,6 +87,11 @@ class WechatPayAggregatedPaymentChannel(
         return ConvertUtils.createTransferResponseFromWechatPay(response)
     }
 
+    override fun cancelTransfer(request: CancelTransferRequest): CancelTransferResponse {
+        val response = wechatpay!!.operation.cancelTransfer(ConvertUtils.cancelTransferRequestToWechatPay(request))
+        return ConvertUtils.cancelTransferResponseFromWechatPay(response)
+    }
+
     fun transactionNotify(request: WechatPayNotifyParseRequest) {
         val response = wechatpay!!.payment.transactionNotify(request)
         val processArgs = TransactionNotifyArgs().apply {
