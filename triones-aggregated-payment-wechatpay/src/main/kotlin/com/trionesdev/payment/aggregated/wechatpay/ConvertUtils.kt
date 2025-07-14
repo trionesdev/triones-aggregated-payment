@@ -65,7 +65,7 @@ object ConvertUtils {
         wechatPayRequest.transferSceneId = request.sceneId
         wechatPayRequest.openId = request.payee?.identity
         wechatPayRequest.userName = request.payee?.name
-        wechatPayRequest.transferAmount = request.amount?.amount?.divide(BigDecimal.valueOf(100))?.toInt()
+        wechatPayRequest.transferAmount = request.amount?.amount?.multiply(BigDecimal.valueOf(100))?.toInt()
         wechatPayRequest.transferRemark = request.remark
         wechatPayRequest.notifyUrl = request.notifyUrl
         wechatPayRequest.userRecvPerception = request.title
