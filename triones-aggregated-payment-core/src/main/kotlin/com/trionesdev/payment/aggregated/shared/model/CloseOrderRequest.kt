@@ -16,8 +16,9 @@ class CloseOrderRequest {
      */
     var outTradeNo: String? = null
     var merchantId: String? = null
+    var operatorId: String? = null
 
-    companion object  {
+    companion object {
         @JvmStatic
         fun builder(): Builder {
             return Builder()
@@ -26,26 +27,15 @@ class CloseOrderRequest {
 
     class Builder {
         var request: CloseOrderRequest = CloseOrderRequest()
-        fun channel(channel: String): Builder {
-            request.channel = channel
-            return this
-        }
+        fun channel(channel: String) = apply { request.channel = channel }
 
-        fun tradeNo(tradeNo: String): Builder {
-            request.tradeNo = tradeNo
-            return this
-        }
+        fun tradeNo(tradeNo: String) = apply { request.tradeNo = tradeNo }
 
-        fun outTradeNo(outTradeNo: String): Builder {
-            request.merchantId = outTradeNo
-            return this
-        }
+        fun outTradeNo(outTradeNo: String) = apply { request.merchantId = outTradeNo }
 
-        fun merchantId(merchantId: String): Builder {
-            request.merchantId = merchantId
-            return this
-        }
+        fun merchantId(merchantId: String)=apply { request.merchantId = merchantId }
 
+        fun operatorId(operatorId: String) = apply { request.operatorId = operatorId }
         fun build(): CloseOrderRequest {
             return request;
         }

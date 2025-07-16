@@ -12,21 +12,25 @@ class CreateOrderRequest {
 
     /**
      * 应用ID
+     * 微信支付：必填
      */
     var appId: String? = null
 
     /**
      * 商户ID
+     * 微信支付：必填
      */
     var merchantId: String? = null
 
     /**
      * 商户自定义订单ID
+     * 微信支付：必填
      */
     var outTradeNo: String? = null
 
     /**
      * 订单标题
+     * 微信支付：必填
      */
     var subject: String? = null
 

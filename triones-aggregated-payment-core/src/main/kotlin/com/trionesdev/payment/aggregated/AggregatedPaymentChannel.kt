@@ -11,7 +11,7 @@ abstract class AggregatedPaymentChannel {
     /**
      * 关闭支付订单
      */
-    abstract fun closeOrder(request: CloseOrderRequest)
+    abstract fun closeOrder(request: CloseOrderRequest):CloseOrderResponse
 
     /**
      * 申请退款

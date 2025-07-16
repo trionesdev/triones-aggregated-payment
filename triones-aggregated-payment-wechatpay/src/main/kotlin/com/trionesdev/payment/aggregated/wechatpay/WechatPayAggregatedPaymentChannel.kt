@@ -69,12 +69,13 @@ class WechatPayAggregatedPaymentChannel(
         return CreateOrderResponse(response)
     }
 
-    override fun closeOrder(request: CloseOrderRequest) {
+    override fun closeOrder(request: CloseOrderRequest):CloseOrderResponse {
         val req = WechatPayCloseOrderRequest().apply {
             this.mchId = request.merchantId
             this.outTradeNo = request.outTradeNo
         }
         wechatpay!!.payment.closeOrder(req)
+        return CloseOrderResponse()
     }
 
     override fun createRefund(request: CreateRefundRequest): CreateRefundResponse {

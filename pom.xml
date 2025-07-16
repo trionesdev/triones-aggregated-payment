@@ -18,6 +18,7 @@
         <module>triones-aggregated-payment-spring</module>
         <module>triones-aggregated-payment-dependencies</module>
         <module>triones-aggregated-payment-spring-boot-starter</module>
+        <module>triones-aggregated-payment-alipay</module>
     </modules>
 
     <properties>

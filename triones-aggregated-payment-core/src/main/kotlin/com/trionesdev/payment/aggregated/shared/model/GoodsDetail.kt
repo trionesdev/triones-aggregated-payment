@@ -23,6 +23,8 @@ class GoodsDetail {
      */
     var price: BigDecimal? = null
 
+    var showUrl: String? = null
+
     companion object {
         @JvmStatic
         fun builder(): Builder {
@@ -53,6 +55,7 @@ class GoodsDetail {
             return this
         }
 
+        fun showUrl(showUrl: String?) = apply { goodsDetail.showUrl = showUrl }
         fun build(): GoodsDetail {
             return goodsDetail
         }
