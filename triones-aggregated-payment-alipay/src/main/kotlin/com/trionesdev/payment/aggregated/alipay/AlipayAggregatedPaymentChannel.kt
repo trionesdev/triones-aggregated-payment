@@ -8,7 +8,7 @@ import com.trionesdev.payment.aggregated.PaymentComponent
 import com.trionesdev.payment.aggregated.shared.enums.Currency
 import com.trionesdev.payment.aggregated.shared.enums.Scene
 import com.trionesdev.payment.aggregated.shared.model.*
-import com.trionesdev.payment.alipay.Alipay
+import com.trionesdev.payment.alipay.v2.Alipay
 import java.math.BigDecimal
 
 @PaymentComponent(channel = "ALIPAY")
