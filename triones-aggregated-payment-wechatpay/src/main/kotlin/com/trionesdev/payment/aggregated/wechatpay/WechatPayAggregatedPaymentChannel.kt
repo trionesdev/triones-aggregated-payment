@@ -113,7 +113,7 @@ class WechatPayAggregatedPaymentChannel(
                 }
             }
 
-            this.successTime = Instant.parse(response.successTime)
+            this.successTime = response.successTime?.let { Instant.parse(response.successTime) }
             this.original = response
         }
         aggregatedPaymentNotify?.transactionNotifyProcess(processArgs)
@@ -139,7 +139,7 @@ class WechatPayAggregatedPaymentChannel(
                     this.currency = Currency.fromString(response.amount?.currency, Currency.CNY)
                 }
             }
-            this.successTime = Instant.parse(response.successTime)
+            this.successTime = response.successTime?.let { Instant.parse(response.successTime) }
             this.original = response
         }
 

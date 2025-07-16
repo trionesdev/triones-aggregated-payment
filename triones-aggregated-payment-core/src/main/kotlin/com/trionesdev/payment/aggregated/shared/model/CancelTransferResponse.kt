@@ -15,12 +15,18 @@ class CancelTransferResponse {
 
     var updateTime: Instant? = null
 
+    /**
+     * 支付渠道原始返回报文
+     */
+    var raw: Map<String, Any?>? = null
+
     class Builder {
         private var response = CancelTransferResponse()
 
         fun outBillNo(outBillNo: String?) = apply { response.outBillNo = outBillNo }
         fun transBillNo(transBillNo: String?) = apply { response.transBillNo = transBillNo }
         fun updateTime(updateTime: Instant?) = apply { response.updateTime = updateTime }
+        fun raw(raw: Map<String, Any?>?) = apply { response.raw = raw }
         fun build(): CancelTransferResponse {
             return response
         }
