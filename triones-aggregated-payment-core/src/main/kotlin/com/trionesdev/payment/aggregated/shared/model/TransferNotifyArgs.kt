@@ -15,7 +15,7 @@ class TransferNotifyArgs {
      * 商家转账单号
      */
     var outBillNo: String? = null
-    var original: Any? = null
+    var raw: Any? = null
 
     companion object {
         @JvmStatic
@@ -42,8 +42,8 @@ class TransferNotifyArgs {
             return this
         }
 
-        fun original(original: Any?): Builder {
-            transferNotifyArgs.original = original
+        fun raw(raw: Any?): Builder {
+            transferNotifyArgs.raw = raw
             return this
         }
 

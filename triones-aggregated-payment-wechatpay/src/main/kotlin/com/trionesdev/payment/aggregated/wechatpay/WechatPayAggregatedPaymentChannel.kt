@@ -23,7 +23,7 @@ class WechatPayAggregatedPaymentChannel(
     override fun createOrder(request: CreateOrderRequest): CreateOrderResponse {
         var response: Map<String, Any?>? = null;
         when (request.scene) {
-            Scene.M_WEB -> {
+            Scene.WAP -> {
                 val h5Res = wechatpay!!.payment.h5.createOrder(CreateOrderRequestConvert.h5(request))
                 response = mapOf("h5Url" to h5Res.h5Url)
             }
@@ -47,7 +47,7 @@ class WechatPayAggregatedPaymentChannel(
                 )
             }
 
-            Scene.WEB_JSAPI,
+            Scene.JSAPI,
             Scene.MINI_PROGRAM -> {
                 val jsApiRes =
                     wechatpay!!.payment.jsApi.createOrderWithRequestPayment(CreateOrderRequestConvert.jsapi(request))
@@ -152,7 +152,7 @@ class WechatPayAggregatedPaymentChannel(
             this.channel = Channel.WECHAT_PAY.name
             this.billNo = response.transferBillNo
             this.outBillNo = response.outBillNo
-            this.original = response
+            this.raw = response
         }
         aggregatedPaymentNotify?.transferNotifyProcess(processArgs)
     }

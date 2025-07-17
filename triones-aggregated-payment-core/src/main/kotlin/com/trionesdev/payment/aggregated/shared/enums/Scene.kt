@@ -6,7 +6,7 @@ enum class Scene {
      * 微信：H5支付，跳转到对应的支付页面（非微信客户端内部浏览器）
      * 支付宝：手机网站支付，拉起支付宝
      */
-    M_WEB, //h5 跳转到支付确认页面
+    WAP, //h5 跳转到支付确认页面
 
     /**
      * 电脑网页
@@ -20,7 +20,7 @@ enum class Scene {
      * 微信：JSAPI
      * 支付宝：JSAPI
      */
-    WEB_JSAPI,
+    JSAPI,
     APP, //APP
 
     /**
