@@ -23,7 +23,7 @@ class AlipayAggregatedPaymentChannel(
         when (request.scene) {
             Scene.PC_WEB -> {
                 val pageRes =
-                    alipay!!.payment.page.createOrderWithRequestPayment(CreateOrderRequestConvert.page(request))
+                    alipay!!.payment.page.createOrder(CreateOrderRequestConvert.page(request))
                 response = mapOf("pageRedirectionData" to pageRes.pageRedirectionData)
             }
 
@@ -31,6 +31,16 @@ class AlipayAggregatedPaymentChannel(
             Scene.JSAPI -> TODO()
             Scene.APP -> TODO()
             Scene.MINI_PROGRAM -> TODO()
+            Scene.ORDER_CODE -> {
+                val pageRes =
+                    alipay!!.payment.orderCode.createOrder(CreateOrderRequestConvert.orderCode(request))
+                response = mapOf(
+                    "qrCode" to pageRes.qrCode,
+                    "outTradeNo" to pageRes.outTradeNo,
+                    "shareCode" to pageRes.shareCode
+                )
+            }
+
             Scene.PAYMENT_CODE -> TODO()
             Scene.FACE_PAY -> TODO()
             null -> TODO()

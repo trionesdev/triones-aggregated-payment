@@ -21,6 +21,11 @@ enum class Scene {
      * 支付宝：JSAPI
      */
     JSAPI,
+    /**
+     * APP
+     * 微信：APP支付
+     * 支付宝：APP支付
+     */
     APP, //APP
 
     /**
@@ -29,7 +34,12 @@ enum class Scene {
      * 支付宝：小程序JSAPI
      */
     MINI_PROGRAM, //小程序
-
+    /**
+     * 订单码
+     * 微信：扫码支付
+     * 支付宝：扫码支付
+     */
+    ORDER_CODE, //订单码
     /**
      * 商户扫描用户出示的付款码
      *

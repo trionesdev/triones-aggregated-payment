@@ -1,8 +1,10 @@
 package com.trionesdev.payment.aggregated.alipay
 
-import com.alipay.api.domain.AlipayTradePagePayModel
-import com.alipay.api.domain.GoodsDetail
+
+import com.alipay.v3.model.AlipayTradePrecreateModel
+import com.alipay.v3.model.GoodsDetail
 import com.trionesdev.payment.aggregated.shared.model.CreateOrderRequest
+import com.trionesdev.payment.alipay.v3.payment.page.AlipayTradePagePayModel
 
 object CreateOrderRequestConvert {
     fun page(request: CreateOrderRequest): AlipayTradePagePayModel {
@@ -14,7 +16,24 @@ object CreateOrderRequestConvert {
                 GoodsDetail().apply {
                     goodsId = it.goodsId
                     goodsName = it.goodsName
-                    quantity = it.quantity?.toLong()
+                    quantity = it.quantity
+                    price = it.price?.toPlainString()
+                    showUrl = it.showUrl
+                }
+            }
+        }
+    }
+
+    fun orderCode(request: CreateOrderRequest): AlipayTradePrecreateModel {
+        return  AlipayTradePrecreateModel().apply {
+            outTradeNo = request.outTradeNo
+            totalAmount = request.amount?.amount?.toPlainString()
+            subject = request.subject
+            goodsDetail = request.goodsDetail?.map {
+                GoodsDetail().apply {
+                    goodsId = it.goodsId
+                    goodsName = it.goodsName
+                    quantity = it.quantity
                     price = it.price?.toPlainString()
                     showUrl = it.showUrl
                 }
