@@ -33,15 +33,15 @@
         </dependency>
         <dependency>
             <groupId>com.trionesdev.payment</groupId>
-            <artifactId>triones-aggregated-payment-spring-boot-starter-rest</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.trionesdev.payment</groupId>
             <artifactId>triones-aggregated-payment-alipay</artifactId>
         </dependency>
         <dependency>
             <groupId>com.trionesdev.payment</groupId>
             <artifactId>triones-alipay-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.trionesdev.payment</groupId>
+            <artifactId>triones-aggregated-payment-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>

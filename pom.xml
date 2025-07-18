@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
     <name>Triones:AggregatedPayment</name>
     <modules>
-        <module>triones-aggregated-payment-spring-boot-starter-rest</module>
         <module>triones-aggregated-payment-core</module>
         <module>triones-aggregated-payment-spring-boot-starter-rest-wechatpay</module>
         <module>triones-aggregated-payment-spring-boot-starter-rest-alipay</module>
