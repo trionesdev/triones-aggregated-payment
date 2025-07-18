@@ -114,7 +114,7 @@ class WechatPayAggregatedPaymentChannel(
             }
 
             this.successTime = response.successTime?.let { Instant.parse(response.successTime) }
-            this.original = response
+            this.raw = response
         }
         aggregatedPaymentNotify?.transactionNotifyProcess(processArgs)
     }

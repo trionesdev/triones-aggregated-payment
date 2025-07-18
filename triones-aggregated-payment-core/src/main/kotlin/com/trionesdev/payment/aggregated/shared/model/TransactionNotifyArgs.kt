@@ -41,7 +41,7 @@ class TransactionNotifyArgs {
     /**
      * 交易信息(第三方支付的交易信息)
      */
-    var original: Any? = null
+    var raw: Any? = null
 
     companion object {
         @JvmStatic
@@ -88,8 +88,8 @@ class TransactionNotifyArgs {
             return this
         }
 
-        fun original(original: Any?): Builder {
-            transactionNotifyArgs.original = original
+        fun raw(original: Any?): Builder {
+            transactionNotifyArgs.raw = original
             return this
         }
 

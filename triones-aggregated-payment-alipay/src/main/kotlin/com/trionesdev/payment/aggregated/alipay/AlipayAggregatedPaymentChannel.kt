@@ -8,6 +8,7 @@ import com.alipay.v3.model.Participant
 import com.trionesdev.payment.aggregated.AggregatedPaymentChannel
 import com.trionesdev.payment.aggregated.AggregatedPaymentNotifyCallback
 import com.trionesdev.payment.aggregated.PaymentComponent
+import com.trionesdev.payment.aggregated.shared.enums.Channel
 import com.trionesdev.payment.aggregated.shared.enums.Currency
 import com.trionesdev.payment.aggregated.shared.enums.Scene
 import com.trionesdev.payment.aggregated.shared.model.*
@@ -112,4 +113,19 @@ class AlipayAggregatedPaymentChannel(
         return CancelTransferResponse().apply {}
     }
 
+
+    fun transactionNotify(paramsMap: MutableMap<String, Array<String>>) {
+        val alipayNotifyModel = alipay!!.payment.notifyParseFromMaps(paramsMap)
+        aggregatedPaymentNotify?.transactionNotifyProcess(TransactionNotifyArgs().apply {
+            channel = Channel.ALIPAY.name
+            tradeNo = alipayNotifyModel.tradeNo
+            outTradeNo = alipayNotifyModel.outTradeNo
+            totalAmount =
+                Money.builder().amount(BigDecimal(alipayNotifyModel.totalAmount)).currency(Currency.CNY).build()
+            payerAmount =
+                Money.builder().amount(BigDecimal(alipayNotifyModel.receiptAmount)).currency(Currency.CNY).build()
+            attach = alipayNotifyModel.body
+            raw = alipayNotifyModel
+        })
+    }
 }
