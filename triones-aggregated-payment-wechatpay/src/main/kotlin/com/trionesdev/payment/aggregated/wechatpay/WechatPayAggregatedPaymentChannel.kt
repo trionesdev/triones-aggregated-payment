@@ -28,7 +28,7 @@ class WechatPayAggregatedPaymentChannel(
                 response = mapOf("h5Url" to h5Res.h5Url)
             }
 
-            Scene.PC_WEB,Scene.ORDER_CODE -> {
+            Scene.WEB,Scene.ORDER_CODE -> {
                 val webRes = wechatpay!!.payment.native.createOrder(CreateOrderRequestConvert.native(request))
                 response = mapOf<String, Any?>("codeUrl" to webRes?.codeUrl)
             }

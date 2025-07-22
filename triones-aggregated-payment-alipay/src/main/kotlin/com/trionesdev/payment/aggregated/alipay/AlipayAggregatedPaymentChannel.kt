@@ -22,7 +22,7 @@ class AlipayAggregatedPaymentChannel(
     override fun createOrder(request: CreateOrderRequest): CreateOrderResponse {
         var response: Map<String, Any?>? = null;
         when (request.scene) {
-            Scene.PC_WEB -> {
+            Scene.WEB -> {
                 val pageRes =
                     alipay!!.payment.page.createOrder(CreateOrderRequestConvert.page(request))
                 response = mapOf("pageRedirectionData" to pageRes.pageRedirectionData)
