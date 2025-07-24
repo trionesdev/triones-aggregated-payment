@@ -8,7 +8,7 @@
         <artifactId>triones-aggregated-payment</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
+    <name>Triones:AggregatedPayment:SpringBootStarter</name>
     <artifactId>triones-aggregated-payment-spring-boot-starter</artifactId>
 
     <properties>
