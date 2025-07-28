@@ -21,11 +21,16 @@ object CreateOrderRequestConvert {
                     showUrl = it.showUrl
                 }
             }
+            notifyUrl = request.notifyUrl
+            request.extra?.let { t ->
+                t["qrPayMode"]?.let { t -> qrPayMode = t as String? }
+                t["returnUrl"]?.let { t -> returnUrl = t as String? }
+            }
         }
     }
 
     fun orderCode(request: CreateOrderRequest): AlipayTradePrecreateModel {
-        return  AlipayTradePrecreateModel().apply {
+        return AlipayTradePrecreateModel().apply {
             outTradeNo = request.outTradeNo
             totalAmount = request.amount?.amount?.toPlainString()
             subject = request.subject

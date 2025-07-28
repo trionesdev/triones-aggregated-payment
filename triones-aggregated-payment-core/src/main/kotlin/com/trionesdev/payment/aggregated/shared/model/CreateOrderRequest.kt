@@ -64,6 +64,8 @@ class CreateOrderRequest {
      */
     var notifyUrl: String? = null
 
+    var extra: Map<String, Any>? = null
+
     companion object {
         @JvmStatic
         fun builder(): Builder {
@@ -130,6 +132,10 @@ class CreateOrderRequest {
         fun notifyUrl(notifyUrl: String): Builder {
             createOrderRequest.notifyUrl = notifyUrl
             return this
+        }
+
+        fun extra(extra: Map<String, Any>) = apply {
+            createOrderRequest.extra = extra
         }
 
         fun build(): CreateOrderRequest {
