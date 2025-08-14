@@ -85,7 +85,13 @@ object ConvertUtils {
         createTransferResponse.billNo = response.transferBillNo
         createTransferResponse.outBillNo = response.outBillNo
         createTransferResponse.extra = mapOf("packageInfo" to response.packageInfo)
-        createTransferResponse.raw = response
+        createTransferResponse.raw = mutableMapOf(
+            "outBillNo" to response.outBillNo,
+            "transferBillNo" to response.transferBillNo,
+            "createTime" to response.createTime,
+            "state" to response.state,
+            "packageInfo" to response.packageInfo
+        )
         return createTransferResponse
     }
 

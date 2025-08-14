@@ -7,7 +7,7 @@ class CreateTransferResponse {
     var billNo: String? = null
     var outBillNo: String? = null
     var extra: Map<String, Any>? = null
-    var raw: Any? = null
+    var raw: MutableMap<String, Any>? = null
 
     companion object {
         @JvmStatic
@@ -34,7 +34,7 @@ class CreateTransferResponse {
             return this
         }
 
-        fun raw(raw: Any?): Builder {
+        fun raw(raw: MutableMap<String, Any>?): Builder {
             response.raw = raw
             return this
         }

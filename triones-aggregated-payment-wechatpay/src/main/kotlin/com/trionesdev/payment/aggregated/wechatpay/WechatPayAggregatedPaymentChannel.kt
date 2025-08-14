@@ -12,6 +12,7 @@ import com.trionesdev.payment.wechatpay.v3.payment.model.WechatPayCloseOrderRequ
 import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
 import java.math.BigDecimal
 import java.time.Instant
+import kotlin.let
 
 @PaymentComponent(channel = "WECHAT_PAY")
 class WechatPayAggregatedPaymentChannel(
@@ -28,7 +29,7 @@ class WechatPayAggregatedPaymentChannel(
                 response = mapOf("h5Url" to h5Res.h5Url)
             }
 
-            Scene.WEB,Scene.ORDER_CODE -> {
+            Scene.WEB, Scene.ORDER_CODE -> {
                 val webRes = wechatpay!!.payment.native.createOrder(CreateOrderRequestConvert.native(request))
                 response = mapOf<String, Any?>("codeUrl" to webRes?.codeUrl)
             }
@@ -69,7 +70,7 @@ class WechatPayAggregatedPaymentChannel(
         return CreateOrderResponse(response)
     }
 
-    override fun closeOrder(request: CloseOrderRequest):CloseOrderResponse {
+    override fun closeOrder(request: CloseOrderRequest): CloseOrderResponse {
         val req = WechatPayCloseOrderRequest().apply {
             this.mchId = request.merchantId
             this.outTradeNo = request.outTradeNo
@@ -85,7 +86,18 @@ class WechatPayAggregatedPaymentChannel(
 
     override fun createTransfer(request: CreateTransferRequest): CreateTransferResponse {
         val response = wechatpay!!.operation.createTransfer(ConvertUtils.createTransferRequestToWechatPay(request))
-        return ConvertUtils.createTransferResponseFromWechatPay(response)
+        return ConvertUtils.createTransferResponseFromWechatPay(response).apply {
+            this.raw?.let { raw ->
+                request.appId?.let { appId ->
+                    raw["appId"] = appId
+                }
+                raw["mchId"] = wechatpay!!.wxPayConfig.mchId
+                request.payee?.identity?.let { identity ->
+                    raw["openId"] = identity
+                }
+            }
+        }
+
     }
 
     override fun cancelTransfer(request: CancelTransferRequest): CancelTransferResponse {
