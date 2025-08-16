@@ -174,9 +174,7 @@ class WechatPayAggregatedPaymentChannel(
     }
 
     fun transferNotify(request: WechatPayNotifyParseRequest) {
-        logger.info("[WechatPayAggregatedPaymentChannel] transferNotify ")
         val response = wechatpay!!.operation.transferNotify(request)
-        logger.info("[WechatPayAggregatedPaymentChannel] transferNotify transferBillNo:{}", response.transferBillNo)
         if (listOf(TransferState.SUCCESS, TransferState.FAIL, TransferState.CANCELLED).contains(response.state)) {
             val state = when (response.state) {
                 TransferState.SUCCESS -> TransferStatus.SUCCESS
