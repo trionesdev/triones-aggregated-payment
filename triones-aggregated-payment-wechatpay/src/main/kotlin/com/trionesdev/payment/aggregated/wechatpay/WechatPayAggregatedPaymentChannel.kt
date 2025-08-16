@@ -6,6 +6,7 @@ import com.trionesdev.payment.aggregated.PaymentComponent
 import com.trionesdev.payment.aggregated.shared.enums.Channel
 import com.trionesdev.payment.aggregated.shared.enums.Currency
 import com.trionesdev.payment.aggregated.shared.enums.Scene
+import com.trionesdev.payment.aggregated.shared.enums.TransferStatus
 import com.trionesdev.payment.aggregated.shared.model.*
 import com.trionesdev.payment.util.GsonUtils
 import com.trionesdev.payment.wechatpay.v3.WechatPay
@@ -13,6 +14,8 @@ import com.trionesdev.payment.wechatpay.v3.operation.enums.TransferState
 import com.trionesdev.payment.wechatpay.v3.payment.enums.RefundStatus
 import com.trionesdev.payment.wechatpay.v3.payment.model.WechatPayCloseOrderRequest
 import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.math.BigDecimal
 import java.time.Instant
 import java.util.Objects
@@ -23,7 +26,9 @@ class WechatPayAggregatedPaymentChannel(
     var wechatpay: WechatPay?,
     var aggregatedPaymentNotify: AggregatedPaymentNotifyCallback?
 ) : AggregatedPaymentChannel() {
-
+    companion object {
+        var logger: Logger = LoggerFactory.getLogger(WechatPayAggregatedPaymentChannel::class.java)
+    }
 
     override fun createOrder(request: CreateOrderRequest): CreateOrderResponse {
         var response: Map<String, Any?>? = null;
@@ -169,12 +174,14 @@ class WechatPayAggregatedPaymentChannel(
     }
 
     fun transferNotify(request: WechatPayNotifyParseRequest) {
+        logger.info("[WechatPayAggregatedPaymentChannel] transferNotify ")
         val response = wechatpay!!.operation.transferNotify(request)
+        logger.info("[WechatPayAggregatedPaymentChannel] transferNotify transferBillNo:{}", response.transferBillNo)
         if (listOf(TransferState.SUCCESS, TransferState.FAIL, TransferState.CANCELLED).contains(response.state)) {
             val state = when (response.state) {
-                TransferState.SUCCESS -> com.trionesdev.payment.aggregated.shared.enums.TransferStatus.SUCCESS
-                TransferState.FAIL -> com.trionesdev.payment.aggregated.shared.enums.TransferStatus.FAIL
-                TransferState.CANCELLED -> com.trionesdev.payment.aggregated.shared.enums.TransferStatus.CANCELED
+                TransferState.SUCCESS -> TransferStatus.SUCCESS
+                TransferState.FAIL -> TransferStatus.FAIL
+                TransferState.CANCELLED -> TransferStatus.CANCELED
                 else -> {
                     null
                 }
