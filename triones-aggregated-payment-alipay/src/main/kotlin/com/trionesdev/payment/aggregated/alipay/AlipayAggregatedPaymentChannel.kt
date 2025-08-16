@@ -126,7 +126,7 @@ class AlipayAggregatedPaymentChannel(
             payerAmount =
                 Money.builder().amount(BigDecimal(alipayNotifyModel.receiptAmount)).currency(Currency.CNY).build()
             attach = alipayNotifyModel.body
-            raw = alipayNotifyModel
+            raw = GsonUtils.toMap(GsonUtils.toJson(alipayNotifyModel))
         })
     }
 }
