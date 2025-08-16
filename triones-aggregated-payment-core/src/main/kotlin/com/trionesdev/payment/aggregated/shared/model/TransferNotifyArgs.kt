@@ -1,5 +1,7 @@
 package com.trionesdev.payment.aggregated.shared.model
 
+import com.trionesdev.payment.aggregated.shared.enums.TransferStatus
+
 class TransferNotifyArgs {
     /**
      * 支付渠道
@@ -15,7 +17,8 @@ class TransferNotifyArgs {
      * 商家转账单号
      */
     var outBillNo: String? = null
-    var raw: Any? = null
+    var status: TransferStatus? = null
+    var raw: MutableMap<String, Any?>? = null
 
     companion object {
         @JvmStatic
@@ -42,7 +45,12 @@ class TransferNotifyArgs {
             return this
         }
 
-        fun raw(raw: Any?): Builder {
+        fun status(state: TransferStatus): Builder {
+            transferNotifyArgs.status = state
+            return this
+        }
+
+        fun raw(raw: MutableMap<String, Any?>?): Builder {
             transferNotifyArgs.raw = raw
             return this
         }

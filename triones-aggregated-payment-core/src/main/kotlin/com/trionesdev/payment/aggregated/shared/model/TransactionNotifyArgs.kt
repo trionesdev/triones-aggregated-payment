@@ -41,7 +41,7 @@ class TransactionNotifyArgs {
     /**
      * 交易信息(第三方支付的交易信息)
      */
-    var raw: Any? = null
+    var raw: MutableMap<String, Any?>? = null
 
     companion object {
         @JvmStatic
@@ -88,7 +88,7 @@ class TransactionNotifyArgs {
             return this
         }
 
-        fun raw(original: Any?): Builder {
+        fun raw(original: MutableMap<String, Any?>?): Builder {
             transactionNotifyArgs.raw = original
             return this
         }

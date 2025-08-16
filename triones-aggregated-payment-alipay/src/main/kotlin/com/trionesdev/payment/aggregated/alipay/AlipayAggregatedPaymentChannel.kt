@@ -13,6 +13,7 @@ import com.trionesdev.payment.aggregated.shared.enums.Currency
 import com.trionesdev.payment.aggregated.shared.enums.Scene
 import com.trionesdev.payment.aggregated.shared.model.*
 import com.trionesdev.payment.alipay.v3.Alipay
+import com.trionesdev.payment.util.GsonUtils
 import java.math.BigDecimal
 
 @PaymentComponent(channel = "ALIPAY")
@@ -100,7 +101,7 @@ class AlipayAggregatedPaymentChannel(
                 channel = request.channel
                 billNo = res.orderId
                 outBillNo = request.outBillNo
-                raw = res
+                raw = GsonUtils.toMap(GsonUtils.toJson(res))
             })
         }
         return CreateTransferResponse().apply {

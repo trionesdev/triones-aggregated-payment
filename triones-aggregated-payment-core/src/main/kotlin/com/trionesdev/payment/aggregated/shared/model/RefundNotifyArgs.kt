@@ -1,5 +1,6 @@
 package com.trionesdev.payment.aggregated.shared.model
 
+import com.trionesdev.payment.aggregated.shared.enums.RefundStatus
 import java.time.Instant
 
 class RefundNotifyArgs {
@@ -41,7 +42,8 @@ class RefundNotifyArgs {
      * 成功时间
      */
     var successTime: Instant? = null
-    var original: Any? = null
+    var status:RefundStatus? = null
+    var raw: MutableMap<String, Any?>? = null
 
     companion object {
         @JvmStatic
@@ -93,8 +95,12 @@ class RefundNotifyArgs {
             return this
         }
 
-        fun original(original: Any?): Builder {
-            refundNotifyArgs.original = original
+        fun status(status: RefundStatus?): Builder {
+            refundNotifyArgs.status = status
+            return this
+        }
+        fun raw(raw: MutableMap<String, Any?>?): Builder {
+            refundNotifyArgs.raw = raw
             return this
         }
 

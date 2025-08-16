@@ -7,11 +7,15 @@ import com.trionesdev.payment.aggregated.shared.enums.Channel
 import com.trionesdev.payment.aggregated.shared.enums.Currency
 import com.trionesdev.payment.aggregated.shared.enums.Scene
 import com.trionesdev.payment.aggregated.shared.model.*
+import com.trionesdev.payment.util.GsonUtils
 import com.trionesdev.payment.wechatpay.v3.WechatPay
+import com.trionesdev.payment.wechatpay.v3.operation.enums.TransferState
+import com.trionesdev.payment.wechatpay.v3.payment.enums.RefundStatus
 import com.trionesdev.payment.wechatpay.v3.payment.model.WechatPayCloseOrderRequest
 import com.trionesdev.payment.wechatpay.v3.payment.model.notify.WechatPayNotifyParseRequest
 import java.math.BigDecimal
 import java.time.Instant
+import java.util.Objects
 import kotlin.let
 
 @PaymentComponent(channel = "WECHAT_PAY")
@@ -126,7 +130,7 @@ class WechatPayAggregatedPaymentChannel(
             }
 
             this.successTime = response.successTime?.let { Instant.parse(response.successTime) }
-            this.raw = response
+            this.raw = GsonUtils.toMap(GsonUtils.toJson(response))
         }
         aggregatedPaymentNotify?.transactionNotifyProcess(processArgs)
     }
@@ -152,20 +156,37 @@ class WechatPayAggregatedPaymentChannel(
                 }
             }
             this.successTime = response.successTime?.let { Instant.parse(response.successTime) }
-            this.original = response
+            this.status = when (response.refundStatus) {
+                RefundStatus.SUCCESS -> com.trionesdev.payment.aggregated.shared.enums.RefundStatus.SUCCESS
+                RefundStatus.CLOSED -> com.trionesdev.payment.aggregated.shared.enums.RefundStatus.CLOSED
+                else -> null
+            }
+            this.raw = GsonUtils.toMap(GsonUtils.toJson(response))
         }
-
-        aggregatedPaymentNotify?.refundNotifyProcess(processArgs)
+        if (Objects.equals(RefundStatus.SUCCESS, response.refundStatus)) {
+            aggregatedPaymentNotify?.refundNotifyProcess(processArgs)
+        }
     }
 
     fun transferNotify(request: WechatPayNotifyParseRequest) {
         val response = wechatpay!!.operation.transferNotify(request)
-        val processArgs = TransferNotifyArgs().apply {
-            this.channel = Channel.WECHAT_PAY.name
-            this.billNo = response.transferBillNo
-            this.outBillNo = response.outBillNo
-            this.raw = response
+        if (listOf(TransferState.SUCCESS, TransferState.FAIL, TransferState.CANCELLED).contains(response.state)) {
+            val state = when (response.state) {
+                TransferState.SUCCESS -> com.trionesdev.payment.aggregated.shared.enums.TransferStatus.SUCCESS
+                TransferState.FAIL -> com.trionesdev.payment.aggregated.shared.enums.TransferStatus.FAIL
+                TransferState.CANCELLED -> com.trionesdev.payment.aggregated.shared.enums.TransferStatus.CANCELED
+                else -> {
+                    null
+                }
+            }
+            val processArgs = TransferNotifyArgs().apply {
+                this.channel = Channel.WECHAT_PAY.name
+                this.billNo = response.transferBillNo
+                this.outBillNo = response.outBillNo
+                this.status = state
+                this.raw = GsonUtils.toMap(GsonUtils.toJson(response))
+            }
+            aggregatedPaymentNotify?.transferNotifyProcess(processArgs)
         }
-        aggregatedPaymentNotify?.transferNotifyProcess(processArgs)
     }
 }
