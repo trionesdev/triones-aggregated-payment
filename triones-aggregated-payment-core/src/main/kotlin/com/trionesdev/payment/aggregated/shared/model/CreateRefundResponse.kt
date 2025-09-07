@@ -10,11 +10,11 @@ class CreateRefundResponse {
      */
     var outRefundNo: String? = null
     /**
-     * 渠道支付订单号
+     * 渠道支付交易号
      */
     var tradeNo: String? = null
     /**
-     * 本地订单号
+     * 本地交易号
      */
     var outTradeNo: String? = null
     /**
