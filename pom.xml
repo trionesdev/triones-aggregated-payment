@@ -5,19 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.trionesdev.payment</groupId>
-    <artifactId>triones-aggregated-payment</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>aggregated-payment</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Triones:AggregatedPayment</name>
     <modules>
-        <module>triones-aggregated-payment-core</module>
-        <module>triones-aggregated-payment-spring-boot-starter-rest-wechatpay</module>
-        <module>triones-aggregated-payment-spring-boot-starter-rest-alipay</module>
-        <module>triones-aggregated-payment-wechatpay</module>
-        <module>triones-aggregated-payment-spring</module>
-        <module>triones-aggregated-payment-dependencies</module>
-        <module>triones-aggregated-payment-spring-boot-starter</module>
-        <module>triones-aggregated-payment-alipay</module>
+        <module>aggregated-payment-core</module>
+        <module>aggregated-payment-wechatpay</module>
+        <module>aggregated-payment-dependencies</module>
+        <module>aggregated-payment-alipay</module>
     </modules>
 
     <properties>
@@ -39,7 +35,7 @@
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-payment-dependencies</artifactId>
+                <artifactId>aggregated-payment-dependencies</artifactId>
                 <version>${project.version}</version>
                 <scope>import</scope>
                 <type>pom</type>

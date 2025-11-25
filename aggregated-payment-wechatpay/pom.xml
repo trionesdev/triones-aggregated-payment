@@ -3,59 +3,47 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.trionesdev.payment</groupId>
-        <artifactId>triones-aggregated-payment</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <artifactId>aggregated-payment</artifactId>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
-    <artifactId>triones-aggregated-payment-spring-boot-starter-rest-alipay</artifactId>
-    <name>Triones:AggregatedPayment:SpringBoot:Rest:Alipay</name>
+    <artifactId>aggregated-payment-wechatpay</artifactId>
+    <name>Triones:AggregatedPayment:WechatPay</name>
+    <url>http://maven.apache.org</url>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <kotlin.code.style>official</kotlin.code.style>
         <kotlin.version>2.1.21</kotlin.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test-junit5</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <groupId>com.trionesdev.payment</groupId>
+            <artifactId>aggregated-payment-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.trionesdev.payment</groupId>
-            <artifactId>triones-aggregated-payment-alipay</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.trionesdev.payment</groupId>
-            <artifactId>triones-alipay-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.trionesdev.payment</groupId>
-            <artifactId>triones-aggregated-payment-spring-boot-starter</artifactId>
+            <artifactId>payment-wechatpay</artifactId>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
@@ -81,9 +69,6 @@
                     <args>
                         <arg>-Xjsr305=strict</arg>
                     </args>
-                    <compilerPlugins>
-                        <plugin>spring</plugin>
-                    </compilerPlugins>
                     <jvmTarget>${maven.compiler.target}</jvmTarget>
                 </configuration>
                 <dependencies>
@@ -96,5 +81,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

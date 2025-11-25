@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <groupId>com.trionesdev.payment</groupId>
-    <artifactId>triones-aggregated-payment-dependencies</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>aggregated-payment-dependencies</artifactId>
+    <version>0.0.2-SNAPSHOT</version>
     <name>Triones:AggregatedPayment:Dependencies</name>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -18,53 +18,28 @@
         <dependencies>
             <dependency>
                 <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-payment-spring-boot-dependencies</artifactId>
-                <version>3.0.0-SNAPSHOT</version>
+                <artifactId>payment-dependencies</artifactId>
+                <version>0.0.2-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-payment-core</artifactId>
+                <artifactId>aggregated-payment-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-payment-wechatpay</artifactId>
+                <artifactId>aggregated-payment-wechatpay</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-payment-spring</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-payment-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-payment-spring-boot-starter-rest</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-payment-spring-boot-starter-rest-wechatpay</artifactId>
+                <artifactId>aggregated-payment-alipay</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-payment-alipay</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.trionesdev.payment</groupId>
-                <artifactId>triones-aggregated-payment-spring-boot-starter-rest-alipay</artifactId>
-                <version>${project.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
