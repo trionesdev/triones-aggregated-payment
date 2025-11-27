@@ -5,15 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.trionesdev.payment</groupId>
-    <artifactId>aggregated-payment</artifactId>
+    <artifactId>triones-aggregated-payment</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Triones:AggregatedPayment</name>
+    <name>Triones:AggregatedPayment:Parent</name>
     <modules>
-        <module>aggregated-payment-core</module>
-        <module>aggregated-payment-wechatpay</module>
         <module>aggregated-payment-dependencies</module>
-        <module>aggregated-payment-alipay</module>
+        <module>aggregated-payment</module>
     </modules>
 
     <properties>
@@ -22,37 +20,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>2.1.21</kotlin.version>
     </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.3.5</version>
-                <scope>import</scope>
-                <type>pom</type>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>com.trionesdev.payment</groupId>
-                <artifactId>aggregated-payment-dependencies</artifactId>
-                <version>${project.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-stdlib-jdk8</artifactId>
-                <version>${kotlin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-test</artifactId>
-                <version>${kotlin.version}</version>
-                <scope>test</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <repositories>
         <repository>
